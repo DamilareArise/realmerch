@@ -20,7 +20,7 @@ const Legal = () => {
           </li>
           <li>
             <strong>Use of Website</strong> <br />
-            Our website is available for personal, non-commercial use only. You agree to use the site lawfully and refrain from any activities that violate the rights of others or the site's security.
+            Our website is available for personal, non-commercial use only. You agree to use the site lawfully and refrain from any activities that violate the rights of others or the site&apos;s security.
           </li>
           <li>
             <strong>Account Registration</strong> <br />
