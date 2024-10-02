@@ -5,9 +5,12 @@ import facebook from "./../assets/facebookk.svg";
 import twitter from "./../assets/x.svg";
 import message from "./../assets/mail.svg";
 import passwordd from "./../assets/password.svg";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
-const Login = () => {
+const Login = ({ app }) => {
   const [email, setEmail] = useState("");
+  const [fullname, setfullname] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
@@ -15,6 +18,39 @@ const Login = () => {
     // login logic go dey here
     console.log("Email:", email);
     console.log("Password:", password);
+  };
+
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+
+  // RegisterUser
+  const validateOrRegisterUser = () => {
+    axios
+      .post("http://localhost:5000/account/register", {
+        fullname: fullname,
+        email: email,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  // signWithGoogle ---------
+  const signWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setfullname(user.displayName);
+        setEmail(user.email);
+        validateOrRegisterUser();
+      })
+      .catch((err) => {
+        console.log("Error occured");
+      });
   };
 
   return (
@@ -28,33 +64,35 @@ const Login = () => {
           <img src={wavingHand} alt="" />
         </span>
 
-        <p className="mt-[13px] mb-[30px] font-[400] text-[16px]">Please login to your account</p>
+        <p className="mt-[13px] mb-[30px] font-[400] text-[16px]">
+          Please login to your account
+        </p>
 
         <div className="flex flex-col items-center">
           <span className="flex gap-[56px] mb-[30px] justify-center">
-            <a href="http://">
+            <button onClick={signWithGoogle}>
               <img
                 src={google}
                 alt=""
                 className="p-[12px] rounded-[10px] border-[1px] border-[#808080]"
               />
-            </a>
+            </button>
 
-            <a href="http://">
+            <button>
               <img
                 src={facebook}
                 alt=""
                 className="p-[12px] rounded-[10px] border-[1px] border-[#808080]"
               />
-            </a>
+            </button>
 
-            <a href="http://">
+            <button>
               <img
                 src={twitter}
                 alt=""
                 className="p-[12px] rounded-[10px] border-[1px] border-[#808080]"
               />
-            </a>
+            </button>
           </span>
 
           <p className="text-center mb-[23px]">OR</p>
@@ -89,7 +127,10 @@ const Login = () => {
               />
             </div>
 
-            <a href="http://" className="text-end py-[16px] font-[400] text-[16px]">
+            <a
+              href="http://"
+              className="text-end py-[16px] font-[400] text-[16px]"
+            >
               Forget Password
             </a>
 
@@ -107,23 +148,19 @@ const Login = () => {
                 className="/mr-2 custom-radio"
                 required
               />
-              <p className="font-[400] text-[16px] ml-[4px]">Agree terms and conditions</p>
+              <p className="font-[400] text-[16px] ml-[4px]">
+                Agree terms and conditions
+              </p>
             </label>
           </form>
         </div>
 
-        <span className='flex justify-center items-center py-[24px] gap-[8px]'>
-          <p className="  font-[400] text-[16px]">
-            New to Real Merch?
-            
-          </p>
+        <span className="flex justify-center items-center py-[24px] gap-[8px]">
+          <p className="  font-[400] text-[16px]">New to Real Merch?</p>
 
-          <a
-              href="http://"
-              className="text-[#476A6F] font-[500] text-[20px]"
-            >
-              Sign up
-            </a>
+          <a href="http://" className="text-[#476A6F] font-[500] text-[20px]">
+            Sign up
+          </a>
         </span>
       </div>
     </div>
