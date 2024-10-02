@@ -52,7 +52,7 @@ const SignUp = () => {
   return (
     <div className="flex h-screen bg-[#fbf0f0]">
       <div className="basis-1/2 pt-[30px] pl-[36px] bg-[#fbf0f0] flex flex-col items-start">
-        <div className="mb-[32px]">
+        <div className="mb-[32px]  flex flex-col gap-[24px]">
           <p className="font-[500] text-[24px] leading-[37.5px]">Join Real Merch Today!</p>
           <p className="font-[400] text-[18px] leading-[28px]">Create an account to unlock an <br/> unlimited shopping experience</p>
         </div>
