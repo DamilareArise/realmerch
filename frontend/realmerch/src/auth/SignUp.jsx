@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 // import wavingHand from "./../assets/wavingHand.svg";
 import google from "./../assets/googlee.svg";
@@ -6,8 +7,10 @@ import twitter from "./../assets/x.svg";
 import message from "./../assets/mail.svg";
 import passwordd from "./../assets/password.svg";
 import full from "./../assets/fullName.svg";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp = ({ info }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +18,8 @@ const SignUp = () => {
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const {app, signWithGoogle, validateOrRegisterUser} = info
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,6 +53,23 @@ const SignUp = () => {
       console.log("Password:", password);
     }
   };
+
+  const auth = getAuth();
+  const signUpUser = () =>{
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed up 
+      const user = userCredential.user;
+      console.log( user );
+      validateOrRegisterUser(fullName, email)
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      
+    });
+  }
 
   return (
     <div className="flex h-screen bg-[#fbf0f0]">
@@ -147,6 +169,7 @@ const SignUp = () => {
             <button
               type="submit"
               className="bg-[#476A6F] rounded-[20px] py-[14px] text-[16px] font-[500] text-white mt-[20px]"
+              onClick={signUpUser}
             >
               Sign up
             </button>
@@ -154,16 +177,17 @@ const SignUp = () => {
 
           {/* Social Media Login */}
           <span className="flex gap-[56px] mt-[30px] justify-center">
-            <a href="http://">
+            <button>
               <img
                 src={google}
                 width={45}
                 height={45}
                 alt=""
                 className="p-[12px] rounded-[10px] border-[1px] border-[#808080]"
+                onClick={signWithGoogle}
               />
-            </a>
-            <a href="http://">
+            </button>
+            <button>
               <img
                 src={facebook}
                 width={45}
@@ -171,8 +195,8 @@ const SignUp = () => {
                 alt=""
                 className="p-[12px] rounded-[10px] border-[1px] border-[#808080]"
               />
-            </a>
-            <a href="http://">
+            </button>
+            <button>
               <img
                 src={twitter}
                 width={45}
@@ -180,14 +204,14 @@ const SignUp = () => {
                 alt=""
                 className="p-[12px] rounded-[10px] border-[1px] border-[#808080]"
               />
-            </a>
+            </button>
           </span>
 
           <span className="flex justify-center items-center py-[24px] gap-[8px]">
             <p className="font-[400] text-[16px]">Already a member?</p>
-            <a href="http://" className="text-[#476A6F] font-[500] text-[20px]">
+            <Link to={'/'} className="text-[#476A6F] font-[500] text-[20px]">
               Login
-            </a>
+            </Link>
           </span>
         </div>
       </div>
