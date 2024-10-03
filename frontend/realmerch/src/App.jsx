@@ -3,6 +3,7 @@ import Login from "./auth/Login"
 import {  Route, Routes, Navigate } from 'react-router-dom';
 import SignUp from "./auth/SignUp";
 import { initializeApp } from "firebase/app"
+import Landing from "./components/Landing";
 
 
 
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp/>} />
+        <Route path="/landing" element={<Landing/>} />
       </Routes>
     </>
   )
