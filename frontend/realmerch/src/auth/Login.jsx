@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import wavingHand from "./../assets/wavingHand.svg";
 import google from "./../assets/googlee.svg";
@@ -5,13 +6,17 @@ import facebook from "./../assets/facebookk.svg";
 import twitter from "./../assets/x.svg";
 import message from "./../assets/mail.svg";
 import passwordd from "./../assets/password.svg";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import axios from "axios";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
-const Login = ({ app }) => {
+
+
+const Login = ({ info }) => {
   const [email, setEmail] = useState("");
-  const [fullname, setfullname] = useState("");
   const [password, setPassword] = useState("");
+  const auth = getAuth();
+  const {app, signWithGoogle} = info
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,38 +25,20 @@ const Login = ({ app }) => {
     console.log("Password:", password);
   };
 
-  const provider = new GoogleAuthProvider();
-  const auth = getAuth();
-
-  // RegisterUser
-  const validateOrRegisterUser = () => {
-    axios
-      .post("http://localhost:5000/account/register", {
-        fullname: fullname,
-        email: email,
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  // signWithGoogle ---------
-  const signWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        setfullname(user.displayName);
-        setEmail(user.email);
-        validateOrRegisterUser();
-      })
-      .catch((err) => {
-        console.log("Error occured");
-      });
-  };
+  const loginUser = ()=>{
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user);
+      
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
+  }
 
   return (
     <div className="flex h-screen bg-[#fbf0f0]">
@@ -137,6 +124,7 @@ const Login = ({ app }) => {
             <button
               type="submit"
               className="bg-[#476A6F] rounded-[20px] py-[14px] text-[16px] font-[500] text-[white]"
+              onClick={loginUser}
             >
               Login
             </button>
@@ -158,9 +146,9 @@ const Login = ({ app }) => {
         <span className="flex justify-center items-center py-[24px] gap-[8px]">
           <p className="  font-[400] text-[16px]">New to Real Merch?</p>
 
-          <a href="http://" className="text-[#476A6F] font-[500] text-[20px]">
+          <Link to={'/signup'} className="text-[#476A6F] font-[500] text-[20px]">
             Sign up
-          </a>
+          </Link>
         </span>
       </div>
     </div>

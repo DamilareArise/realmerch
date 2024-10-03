@@ -15,13 +15,15 @@ const registerUser = (req, res) => {
         }
     })
     .then((data) => {
-        if (data) {
+        if (!res.headersSent) {  // Ensure headers are not already sent
             res.send({ status: true, data });
         }
     })
     .catch((err) => {
-        res.status(500).send({ status: false, message: err.message });  
-    });
+        if (!res.headersSent) {  // Ensure headers are not already sent
+            res.status(500).send({ status: false, message: err.message });
+        }
+    })
 };
 
 module.exports = {registerUser}
