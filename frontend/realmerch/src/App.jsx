@@ -4,6 +4,7 @@ import SignUp from "./auth/SignUp";
 import { initializeApp } from "firebase/app";
 import axios from "axios";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import Landing from "./components/Landing";
 
 function App() {
   const firebaseConfig = {
@@ -64,6 +65,7 @@ function App() {
           }
         />
         <Route path="/signup" element={<SignUp info = {data} />} />
+        <Route path="/landing" element={<Landing/>}/>
       </Routes>
     </>
   );
