@@ -9,15 +9,22 @@ import home from "./../assets/home.svg";
 import promo from "./../assets/promotional.svg";
 import others from "./../assets/others.svg";
 import Category1 from "./Categories/category1";
+import Category2 from "./Categories/Category2";
+import Event from "./Events/Event";
+import Recommended from "./Categories/Recommended";
+import Ads from "./Events/Ads";
+import About from "./About";
+import Contact from "./Contact";
+import Footer from "./Footer";
 // import female from './../assets/female.svg'
 
 const Landing = () => {
   return (
-    <div className="bg-[#fbf0f0]">
+    <div className="bg-[#fbf0f0] ">
       <Navbar />
 
-      <div className="pt-[100px]  px-[50px]">
-        <div className="flex justify-between mb-[30px]">
+      <div className="pt-[100px]  ">
+        <div className="flex justify-between mb-[30px] px-[50px]">
           <div className="overflow-hidden rounded-3xl">
             <img
               src={landing}
@@ -66,7 +73,39 @@ const Landing = () => {
 
 
        
+        <div className=" pb-[35px] px-[50px]">
         <Category1/>
+        </div>
+
+
+        <div className=" pb-[30px]">
+        <Category2/>
+        </div>
+
+        <div>
+          <Event/>
+        </div>
+
+
+        <div>
+          <Recommended/>
+        </div>
+
+        <div className="px-[50px] py-[16px]">
+          <Ads/>
+        </div>
+
+        <div className="px-[50px] pt-[85px] pb-[44px]  bg-gradient-to-b to-[#0000001A] from-[#fbf0f0]">
+          <About/>
+        </div>
+
+        <div className="pb-[20px]">
+          <Contact/>
+        </div>
+
+        <div>
+          <Footer/>
+        </div>
     
       </div>
     </div>
