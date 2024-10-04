@@ -21,3 +21,30 @@
     
   }
 }
+
+.splide__arrow svg {
+  fill: #170045 !important;
+  width: 15px !important;
+  height: 15px !important;
+  /* transform: scale(1.5); */
+  position: relative !important;
+  right: 10%;
+}
+/* .splide__arrow {
+  background: transparent !important;
+}
+
+.splide__arrow--prev {
+  left: 95% !important;
+  top: 110% !important;
+  right: 3em !important;
+}
+.splide__arrow--next {
+  top: 110% !important;
+}
+
+li img{
+  border-radius: 4px;
+  height: 208px;
+  width: 208px;
+} */
