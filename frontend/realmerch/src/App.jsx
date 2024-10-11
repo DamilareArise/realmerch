@@ -6,6 +6,9 @@ import axios from "axios";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Landing from "./components/Landing";
 import AdminLogin from "./auth/admin/AdminLogin";
+import AdminDashboard from "./components/AdminDash/AdminDashboard";
+import AdminProductDashboard from "./components/AdminDash/AdminProductDashboard";
+import AdminOrderList from "./components/AdminDash/AdminOrderList";
 
 function App() {
   const firebaseConfig = {
@@ -68,6 +71,9 @@ function App() {
         <Route path="/signup" element={<SignUp info = {data} />} />
         <Route path="/landing" element={<Landing/>}/>
         <Route path="/admin/login" element={<AdminLogin/>}/>
+        <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
+        <Route path="/admin/productDashboard" element={<AdminProductDashboard/>}/>
+        <Route path="/admin/adminOrderList" element={<AdminOrderList/>}/>
       </Routes>
     </>
   );
