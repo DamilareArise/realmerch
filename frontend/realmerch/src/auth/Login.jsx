@@ -7,7 +7,7 @@ import twitter from "./../assets/x.svg";
 import message from "./../assets/mail.svg";
 import passwordd from "./../assets/password.svg";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -15,8 +15,9 @@ const Login = ({ info }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth();
-  const {app, signWithGoogle} = info
-
+  const [loading, setloading] = useState(false)
+  const {signWithGoogle} = info
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,18 +27,24 @@ const Login = ({ info }) => {
   };
 
   const loginUser = ()=>{
+    setloading(true)
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      console.log(user);
-      
+      console.log(user); 
+      setloading(false)
+      navigate('/')
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
+      setloading(false)
+      alert('Wrong Email or Password')
     });
+
+
   }
 
   return (
@@ -126,20 +133,8 @@ const Login = ({ info }) => {
               className="bg-[#476A6F] rounded-[20px] py-[14px] text-[16px] font-[500] text-[white]"
               onClick={loginUser}
             >
-              Login
+              {loading ? ('Loading...') : ('Login')}
             </button>
-
-            <label className="flex items-center self-start pt-[16px] ">
-              <input
-                type="checkbox"
-                name="terms"
-                className="/mr-2 custom-radio"
-                required
-              />
-              <p className="font-[400] text-[16px] ml-[4px]">
-                Agree terms and conditions
-              </p>
-            </label>
           </form>
         </div>
 

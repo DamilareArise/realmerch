@@ -15,11 +15,12 @@ const SignUp = ({ info }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [loading, setloading] = useState(false)
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const {app, signWithGoogle, validateOrRegisterUser} = info
+
+  const {signWithGoogle, validateOrRegisterUser } = info
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,20 +55,26 @@ const SignUp = ({ info }) => {
     }
   };
 
+  
+  // signup user
+
   const auth = getAuth();
   const signUpUser = () =>{
+    setloading(true)
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed up 
       const user = userCredential.user;
       console.log( user );
       validateOrRegisterUser(fullName, email)
+      setloading(false)
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
-      
+      setloading(false)
+      alert('Email already exist')
     });
   }
 
@@ -171,7 +178,7 @@ const SignUp = ({ info }) => {
               className="bg-[#476A6F] rounded-[20px] py-[14px] text-[16px] font-[500] text-white mt-[20px]"
               onClick={signUpUser}
             >
-              Sign up
+             { loading ? ('Loading...') : ('Sign up')}
             </button>
           </form>
 

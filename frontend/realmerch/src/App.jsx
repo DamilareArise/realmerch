@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import SignUp from "./auth/SignUp";
 import { initializeApp } from "firebase/app";
 import axios from "axios";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, sendEmailVerification } from "firebase/auth";
 import Landing from "./components/Landing";
 import AdminLogin from "./auth/admin/AdminLogin";
 import AdminDashboard from "./components/AdminDash/AdminDashboard";
@@ -25,7 +25,7 @@ function App() {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
-  // ValidateUser
+  // Validate User Or Register
   const validateOrRegisterUser = (fullname, email) => {
     axios
       .post("http://localhost:5000/account/register", {
@@ -34,6 +34,9 @@ function App() {
       })
       .then((response) => {
         console.log(response.data);
+        if (response.data.status){
+          verifyEmail(email)
+        }
       })
       .catch((error) => {
         console.error(error.message);
@@ -53,23 +56,36 @@ function App() {
       });
   };
 
+
+
+  // send email verification
+  const verifyEmail = (email) =>{
+
+    const actionCodeSettings = {
+      url: 'http://localhost:5173/signup', // The URL to which users will be redirected
+      handleCodeInApp: true, // If set to true, the app will handle the link directly
+    };
+
+    sendEmailVerification(auth.currentUser, actionCodeSettings)
+    .then(()=>{
+      alert(`A verification email has been sent to ${email}`);
+    })
+
+  }
+
   let data = {
     app,
     signWithGoogle,
-    validateOrRegisterUser
+    validateOrRegisterUser,
   } 
 
+  
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Login info = {data} />
-          }
-        />
+        <Route path="/login" element={<Login info = {data} />} />
         <Route path="/signup" element={<SignUp info = {data} />} />
-        <Route path="/landing" element={<Landing/>}/>
+        <Route path="/" element={<Landing/>}/>
         <Route path="/admin/login" element={<AdminLogin/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
         <Route path="/admin/productDashboard" element={<AdminProductDashboard/>}/>
