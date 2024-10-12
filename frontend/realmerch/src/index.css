@@ -30,6 +30,9 @@
   position: relative !important;
   right: 10%;
 }
+.splide__slide{
+  width: fit-content !important;
+}
 /* .splide__arrow {
   background: transparent !important;
 }
