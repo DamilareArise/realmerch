@@ -6,6 +6,8 @@ import facebook from "./../assets/facebookk.svg";
 import twitter from "./../assets/x.svg";
 import message from "./../assets/mail.svg";
 import passwordd from "./../assets/password.svg";
+import loginn from './../assets/loginbg.png'
+import loginmg from './../assets/loginmg.jpg'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -48,13 +50,15 @@ const Login = ({ info }) => {
   }
 
   return (
-    <div className="flex h-screen bg-[#fbf0f0]">
-      <div className="basis-1/2 bg-[#476A6F] /rounded-tr-[250px] rounded-br-[250px]">
-        ttttt
-      </div>
-      <div className="basis-1/2 pt-[116px] pl-[36px] bg-[#fbf0f0] ">
+    <div className={`flex justify-center items-center h-screen /bg-[#fbf0f0]  bg-cover bg-center`}
+    style={{
+      backgroundImage: `url(${loginn})`,
+    }}
+    >
+      <div className="flex justify-center items-center w-[90%] h-[90%] bg-[#F2E3DD] ">
+        <div className="basis-1/2  p-[30px]">
         <span className="flex gap-[7px] items-center">
-          <p className="font-[500] text-[24px]">Welcome Favour,</p>
+          <p className="font-[500] text-[24px]">Welcome to Real Merch</p>
           <img src={wavingHand} alt="" />
         </span>
 
@@ -97,7 +101,7 @@ const Login = ({ info }) => {
               <input
                 type="email"
                 placeholder="Email"
-                className="py-[18px]  border-none outline-none w-full placeholder:text-[20px] bg-[#fbf0f0]"
+                className="py-[18px]  border-none outline-none w-full placeholder:text-[20px] bg-[#F2E3DD]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -114,7 +118,7 @@ const Login = ({ info }) => {
               <input
                 type="password"
                 placeholder="Password"
-                className="py-[18px]  border-none outline-none w-full placeholder:text-[20px] bg-[#fbf0f0]"
+                className="py-[18px]  border-none outline-none w-full placeholder:text-[20px] bg-[#F2E3DD]"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -130,7 +134,7 @@ const Login = ({ info }) => {
 
             <button
               type="submit"
-              className="bg-[#476A6F] rounded-[20px] py-[14px] text-[16px] font-[500] text-[white]"
+              className="bg-[#845649] rounded-[20px] py-[14px] text-[16px] font-[500] text-[white]"
               onClick={loginUser}
             >
               {loading ? ('Loading...') : ('Login')}
@@ -141,10 +145,18 @@ const Login = ({ info }) => {
         <span className="flex justify-center items-center py-[24px] gap-[8px]">
           <p className="  font-[400] text-[16px]">New to Real Merch?</p>
 
-          <Link to={'/signup'} className="text-[#476A6F] font-[500] text-[20px]">
+          <Link to={'/signup'} className="text-[#20052B] font-[500] text-[20px]">
             Sign up
           </Link>
         </span>
+        </div>
+        <div className="basis-1/2 h-full bg-center bg-cover"
+          style={{
+            backgroundImage: `url(${loginmg})`,
+          }}
+        >
+
+        </div>
       </div>
     </div>
   );

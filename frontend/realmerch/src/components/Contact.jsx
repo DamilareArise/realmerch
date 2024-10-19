@@ -4,7 +4,7 @@ import email from "./../assets/contactMail.svg"
 import whatsapp from './../assets/whatsapp.svg'
 const Contact = () => {
   return (
-    <div className="bg-[#20052B] px-[50px] py-[56px] flex text-[#FFFFFF] justify-between">
+    <div className="bg-[#845649] px-[50px] py-[56px] flex text-[#FFFFFF] justify-between">
       <a href="mailto:" className="flex items-start gap-[12px]">
         <img src={email} alt="" width={30}/>
         <span className="flex flex-col gap-[2px]">
