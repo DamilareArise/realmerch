@@ -1,12 +1,19 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import loginImage from "././../../assets/adminLogin.jpg";
 import message from "././../../assets/mail.svg";
 import passwordd from "././../../assets/password.svg"; // Replace this with a lock icon image
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const AdminLogin = () => {
+
+const AdminLogin = ( {signin} ) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setloading] = useState(false)
+
+  const navigate = useNavigate()
 
   const validateForm = () => {
     const newErrors = {};
@@ -37,6 +44,28 @@ const AdminLogin = () => {
       // You can redirect or trigger further logic here
     }
   };
+
+  const loginAdmin = () =>{
+    setloading(true)
+    axios.post("http://localhost:5000/account/check-admin", {
+      email
+    })
+    .then((response)=>{
+      if(response.data.status){
+        signin(email, password)
+        navigate('/admin/dashboard')
+
+      }
+      else{
+        alert('Not admin')
+        setloading(false)
+      }
+    })
+    .catch((err)=>{
+      console.log(err)
+      setloading(false)
+    })
+  }
 
   return (
     <div className="h-screen flex bg-[#F9F2F2]">
@@ -114,8 +143,12 @@ const AdminLogin = () => {
           <button
             type="submit"
             className="w-full bg-[#845649] rounded-tl-[40px] rounded-br-[40px] text-white font-bold py-[17px] px-4 hover:opacity-[75%] transition duration-300"
+            onClick={loginAdmin}
           >
-            Login
+            {
+              loading ? 'Loading...' : 'Login'
+
+            }
           </button>
         </form>
       </div>

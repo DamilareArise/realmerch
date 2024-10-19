@@ -16,9 +16,14 @@ import Ads from "./Events/Ads";
 import About from "./About";
 import Contact from "./Contact";
 import Footer from "./Footer";
+
 // import female from './../assets/female.svg'
 
 const Landing = () => {
+
+  
+
+
   return (
     <div className="bg-[#fbf0f0] ">
       <Navbar />

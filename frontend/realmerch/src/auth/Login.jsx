@@ -6,7 +6,6 @@ import facebook from "./../assets/facebookk.svg";
 import twitter from "./../assets/x.svg";
 import message from "./../assets/mail.svg";
 import passwordd from "./../assets/password.svg";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -14,9 +13,8 @@ import { Link, useNavigate } from "react-router-dom";
 const Login = ({ info }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const auth = getAuth();
   const [loading, setloading] = useState(false)
-  const {signWithGoogle} = info
+  const {signWithGoogle, loginWithEmailAndPassword} = info
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
@@ -28,23 +26,10 @@ const Login = ({ info }) => {
 
   const loginUser = ()=>{
     setloading(true)
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user); 
-      setloading(false)
-      navigate('/')
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      setloading(false)
-      alert('Wrong Email or Password')
-    });
-
-
+    loginWithEmailAndPassword(email, password)
+    setloading(false)
+    navigate('/')
+    
   }
 
   return (

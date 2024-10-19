@@ -1,9 +1,9 @@
 import Login from "./auth/Login";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import SignUp from "./auth/SignUp";
 import { initializeApp } from "firebase/app";
 import axios from "axios";
-import { getAuth, signInWithPopup, GoogleAuthProvider, sendEmailVerification } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, sendEmailVerification,signInWithEmailAndPassword } from "firebase/auth";
 import Landing from "./components/Landing";
 import AdminLogin from "./auth/admin/AdminLogin";
 import AdminDashboard from "./components/AdminDash/AdminDashboard";
@@ -24,6 +24,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
+  const navigate = useNavigate()
 
   // Validate User Or Register
   const validateOrRegisterUser = (fullname, email) => {
@@ -37,6 +38,7 @@ function App() {
         if (response.data.status){
           verifyEmail(email)
         }
+        navigate('/')
       })
       .catch((error) => {
         console.error(error.message);
@@ -52,17 +54,33 @@ function App() {
         validateOrRegisterUser(user.displayName, user.email);
       })
       .catch((err) => {
-        console.log("Error occured");
+        console.log("Error occured", err);
       });
   };
 
+  // signin with email and password
+  const loginWithEmailAndPassword = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user); 
+
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert('Wrong Email or Password')
+      });
+    }
 
 
   // send email verification
   const verifyEmail = (email) =>{
 
     const actionCodeSettings = {
-      url: 'http://localhost:5173/signup', // The URL to which users will be redirected
+      url: 'http://localhost:5173/login', // The URL to which users will be redirected
       handleCodeInApp: true, // If set to true, the app will handle the link directly
     };
 
@@ -77,6 +95,7 @@ function App() {
     app,
     signWithGoogle,
     validateOrRegisterUser,
+    loginWithEmailAndPassword,
   } 
 
   
@@ -86,7 +105,7 @@ function App() {
         <Route path="/login" element={<Login info = {data} />} />
         <Route path="/signup" element={<SignUp info = {data} />} />
         <Route path="/" element={<Landing/>}/>
-        <Route path="/admin/login" element={<AdminLogin/>}/>
+        <Route path="/admin/login" element={<AdminLogin signin = {loginWithEmailAndPassword}/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
         <Route path="/admin/productDashboard" element={<AdminProductDashboard/>}/>
         <Route path="/admin/adminOrderList" element={<AdminOrderList/>}/>
