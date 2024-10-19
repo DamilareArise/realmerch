@@ -2,6 +2,7 @@
 
 import Card from "../Card";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import mock from "./../../assets/mock.svg";
 
 import "@splidejs/react-splide/css";
 
@@ -21,7 +22,7 @@ const Category1 = () => {
       }}
     >
       <SplideSlide>
-        <Card />
+        <Card  img={mock}/>
       </SplideSlide>
 
       <SplideSlide>
