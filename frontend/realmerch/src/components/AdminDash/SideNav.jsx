@@ -10,7 +10,7 @@ import logout from './../../assets/logout.svg';
 
 const SideNav = () => {
   
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
 
   const toggleSidebar = () => {
