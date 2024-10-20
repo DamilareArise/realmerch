@@ -1,6 +1,6 @@
 // import React from 'react'
 import search from "./../assets/search.svg";
-import profile from "./../assets/profile.svg";
+import profilee from "./../assets/profile.svg";
 import cart from "./../assets/cart.svg";
 import logo from "./../assets/logo.svg";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
@@ -9,12 +9,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [email, setemail] = useState("");
+  const [profile, setprofile] = useState("");
   const auth = getAuth();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setemail(user.email);
+        setprofile(user.photoURL)
         // ...
       } else {
         // User is signed out
@@ -44,7 +46,9 @@ const Navbar = () => {
         </span>
 
         <div className="flex gap-[13px] items-center">
-          <img src={profile} alt="" />
+          {
+            profile? <img src={profile} alt=""  width={50} className="rounded-[100px]"/> : <img src={profilee} alt=""/>
+          }
 
           {email ? (
             <div>
