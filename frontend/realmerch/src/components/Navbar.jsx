@@ -1,4 +1,4 @@
-// import React from 'react'
+import React, { useContext } from 'react'
 import search from "./../assets/search.svg";
 import profilee from "./../assets/profile.svg";
 import cart from "./../assets/cart.svg";
@@ -6,6 +6,7 @@ import logo from "./../assets/logo.svg";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "./context/CartContext";
 
 const Navbar = () => {
   const [email, setemail] = useState("");
@@ -33,6 +34,7 @@ const Navbar = () => {
         // An error happened.
       });
   };
+  const { cartItems } = useContext(CartContext);
 
   return (
 
@@ -59,11 +61,14 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="flex gap-[13px] items-center">
+        <Link to={'/cart'} className="flex gap-[13px] items-center">
           <img src={cart} alt="" />
 
           <p>Cart</p>
-        </div>
+          <span className="absolute top-[20px] right-[25px] bg-red-500 text-white rounded-full text-xs px-2 py-1">
+              {cartItems.length}
+            </span>
+        </Link>
       </div>
     </div>
   );
