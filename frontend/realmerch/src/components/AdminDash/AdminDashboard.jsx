@@ -156,10 +156,10 @@ const AdminDashboard = () => {
                 <img src={activity} alt="" />
                 <span className="flex flex-col gap-[10px]">
                   <p className="font-[600] text-[16px] lg:text-[20px] leading-[24.2px]">
-                    Most Recent Activity
+                  Customer Value
                   </p>
                   <p className="font-[400] text-[16px] lg:text-[20px] leading-[24.2px]">
-                    Thesis Upload
+                    90%
                   </p>
                 </span>
               </div>

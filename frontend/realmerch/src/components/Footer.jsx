@@ -6,7 +6,7 @@ import facebook from "./../assets/facebookIcon.svg";
 import whatsapp from "./../assets/whatsappIcon.svg";
 const Footer = () => {
   return (
-    <div className="bg-[#20052B] flex px-[50px] justify-between text-[#FFFFFF] py-[67px]">
+    <div className="bg-[#845649] flex px-[50px] justify-between text-[#FFFFFF] py-[67px]">
       <div className="flex flex-col gap-[17px]">
         <p className="text-[18px] font-[500] leading-[28px]">
           Customer Service

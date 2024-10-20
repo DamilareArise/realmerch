@@ -3,12 +3,20 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import SignUp from "./auth/SignUp";
 import { initializeApp } from "firebase/app";
 import axios from "axios";
-import { getAuth, signInWithPopup, GoogleAuthProvider, sendEmailVerification,signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import Landing from "./components/Landing";
 import AdminLogin from "./auth/admin/AdminLogin";
 import AdminDashboard from "./components/AdminDash/AdminDashboard";
 import AdminProductDashboard from "./components/AdminDash/AdminProductDashboard";
 import AdminOrderList from "./components/AdminDash/AdminOrderList";
+import { CartProvider } from "./components/context/CartContext";
+import Cart from "./components/Cart";
 
 function App() {
   const firebaseConfig = {
@@ -24,7 +32,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Validate User Or Register
   const validateOrRegisterUser = (fullname, email) => {
@@ -35,10 +43,10 @@ function App() {
       })
       .then((response) => {
         console.log(response.data);
-        if (response.data.status){
-          verifyEmail(email)
+        if (response.data.status) {
+          verifyEmail(email);
         }
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         console.error(error.message);
@@ -62,54 +70,58 @@ function App() {
   const loginWithEmailAndPassword = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
+        // Signed in
         const user = userCredential.user;
-        console.log(user); 
-
+        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        alert('Wrong Email or Password')
+        alert("Wrong Email or Password");
       });
-    }
-
+  };
 
   // send email verification
-  const verifyEmail = (email) =>{
-
+  const verifyEmail = (email) => {
     const actionCodeSettings = {
-      url: 'http://localhost:5173/login', // The URL to which users will be redirected
+      url: "http://localhost:5173/login", // The URL to which users will be redirected
       handleCodeInApp: true, // If set to true, the app will handle the link directly
     };
 
-    sendEmailVerification(auth.currentUser, actionCodeSettings)
-    .then(()=>{
+    sendEmailVerification(auth.currentUser, actionCodeSettings).then(() => {
       alert(`A verification email has been sent to ${email}`);
-    })
-
-  }
+    });
+  };
 
   let data = {
     app,
     signWithGoogle,
     validateOrRegisterUser,
     loginWithEmailAndPassword,
-  } 
+  };
 
-  
   return (
     <>
-      <Routes>
-        <Route path="/login" element={<Login info = {data} />} />
-        <Route path="/signup" element={<SignUp info = {data} />} />
-        <Route path="/" element={<Landing/>}/>
-        <Route path="/admin/login" element={<AdminLogin signin = {loginWithEmailAndPassword}/>}/>
-        <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
-        <Route path="/admin/productDashboard" element={<AdminProductDashboard/>}/>
-        <Route path="/admin/adminOrderList" element={<AdminOrderList/>}/>
-      </Routes>
+      <CartProvider>
+        <Routes>
+          <Route path="/login" element={<Login info={data} />} />
+          <Route path="/signup" element={<SignUp info={data} />} />
+          <Route path="/" element={<Landing />} />
+          <Route
+            path="/admin/login"
+            element={<AdminLogin signin={loginWithEmailAndPassword} />}
+          />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route
+            path="/admin/productDashboard"
+            element={<AdminProductDashboard />}
+          />
+          <Route path="/admin/adminOrderList" element={<AdminOrderList />} />
+          <Route path="/cart" element={<Cart />} />
+
+        </Routes>
+      </CartProvider>
     </>
   );
 }

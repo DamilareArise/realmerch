@@ -7,7 +7,7 @@ import "@splidejs/react-splide/css";
 const Recommended = () => {
   return (
     <div>
-        <div className='py-[33px] bg-[#E3E3E3] px-[58px]'>
+        <div className='py-[33px] bg-[#FFFFFF] px-[58px] font-[500] text-[24px]'>
             <a href="/category2">Recommended for you</a>
         </div>
 

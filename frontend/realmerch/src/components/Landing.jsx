@@ -10,7 +10,7 @@ import promo from "./../assets/promotional.svg";
 import others from "./../assets/others.svg";
 import Category1 from "./Categories/category1";
 import Category2 from "./Categories/Category2";
-import Event from "./Events/Event";
+// import Event from "./Events/Event";
 import Recommended from "./Categories/Recommended";
 import Ads from "./Events/Ads";
 import About from "./About";
@@ -29,7 +29,7 @@ const Landing = () => {
       <Navbar />
 
       <div className="pt-[100px]  ">
-        <div className="flex justify-between mb-[30px] px-[50px]">
+        <div className="flex justify-between mb-[30px] px-[50px] text-[#FFFFFF]">
           <div className="overflow-hidden rounded-3xl">
             <img
               src={landing}
@@ -39,7 +39,7 @@ const Landing = () => {
               className="/h-[350px] hover:scale-[1.1] transition-all"
             />
           </div>
-          <div className="py-[24px] bg-[#476A6F] pl-[24px] pr-[54px] flex flex-col gap-[23px]">
+          <div className="py-[24px] bg-[#845649] pl-[24px] pr-[54px] flex flex-col gap-[23px]">
             <p>All Categories</p>
             <div className="flex flex-col gap-[17px]">
               <span className="flex gap-[10px] items-center">
@@ -87,20 +87,20 @@ const Landing = () => {
         <Category2/>
         </div>
 
-        <div>
+        {/* <div>
           <Event/>
-        </div>
+        </div> */}
 
 
         <div>
           <Recommended/>
         </div>
 
-        <div className="px-[50px] py-[16px]">
+        <div className="px-[50px] /pt-[16px]">
           <Ads/>
         </div>
 
-        <div className="px-[50px] pt-[85px] pb-[44px]  bg-gradient-to-b to-[#0000001A] from-[#fbf0f0]">
+        <div className="px-[50px] pt-[30px] pb-[44px]  bg-gradient-to-b to-[#0000001A] from-[#fbf0f0]">
           <About/>
         </div>
 
