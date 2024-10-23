@@ -19,7 +19,7 @@ const SideNav = () => {
 
   return (
     <div
-      className={`h-screen fixed ${isCollapsed ? 'w-[10%]' : 'w-[15%]'} bg-[#845649] px-[20px] py-[28px] flex flex-col items-center gap-[28px] transition-all duration-300`}
+      className={`h-screen fixed z-[100000000] ${isCollapsed ? 'w-[10%]' : 'w-[15%]'} bg-[#845649] px-[20px] py-[28px] flex flex-col items-center gap-[28px] transition-all duration-300`}
     >
      
       <img

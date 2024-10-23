@@ -17,6 +17,7 @@ import AdminProductDashboard from "./components/AdminDash/AdminProductDashboard"
 import AdminOrderList from "./components/AdminDash/AdminOrderList";
 import { CartProvider } from "./components/context/CartContext";
 import Cart from "./components/Cart";
+import AdminUserSearch from "./components/AdminDash/AdminUserSearch";
 
 function App() {
   const firebaseConfig = {
@@ -119,6 +120,7 @@ function App() {
           />
           <Route path="/admin/adminOrderList" element={<AdminOrderList />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/Admin/user-search" element={<AdminUserSearch />} />
 
         </Routes>
       </CartProvider>
