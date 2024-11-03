@@ -1,7 +1,21 @@
 import React from 'react'
 import profile from './../../assets/userlistprof.svg'
 const UserInfo = ({ user }) => {
-    if (!user) return <div>Select a user to see their details</div>;
+    if (!user) return <div>
+      <div>Select a user to see their details</div>
+
+      <div className='mt-[20px]'>
+        <p className='font-[500] text-[18px]'>All Admins are expected to:</p>
+
+        <ul className='list-inside list-disc'>
+          <li>Protect customer data by following security protocols</li>
+          <li>Regularly update product listings (descriptions, images, prices).</li>
+          <li>Process orders promptly and ensure accurate status updates.</li>
+          <li>Respond to customer inquiries or complaints in a timely and professional manner.</li>
+          <li>Implement discounts, coupons, or special offers as scheduled.</li>
+        </ul>
+      </div>
+    </div>;
 
     return (
       <div className="text-gray-700">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import arrow from "./../../assets/arrowBack.svg";
 import reviews from "./../../assets/reviews.svg";
 import profile from "./../../assets/profilee.svg";
@@ -6,6 +7,7 @@ import contact from "./../../assets/contact.svg";
 import task from "./../../assets/task.svg";
 import orders from "./../../assets/orders.svg";
 import product from "./../../assets/product.svg";
+import database from "./../../assets/database.svg";
 import logout from "./../../assets/logout.svg";
 
 const SideNav = () => {
@@ -31,25 +33,30 @@ const SideNav = () => {
       />
 
       <div className="flex flex-col gap-[14px] items-start">
-        <div className="flex items-center">
-          <img
-            src={product}
-            alt="Product"
-            className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
-          />
-          {!isCollapsed && <span className="text-white ml-4">Product</span>}
-        </div>
+        <Link to={"/admin/productDashboard"}>
+          <div className="flex items-center">
+            <img
+              src={product}
+              alt="Product"
+              className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
+            />
+            {!isCollapsed && <span className="text-white ml-4">Product</span>}
+          </div>
+        </Link>
 
-        <div className="flex items-center">
-          <img
-            src={orders}
-            alt="Orders"
-            className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
-          />
-          {!isCollapsed && <span className="text-white ml-4">Orders</span>}
-        </div>
+        <Link to={"/admin/adminOrderList"}>
+          <div className="flex items-center">
+            <img
+              src={orders}
+              alt="Orders"
+              className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
+            />
+            {!isCollapsed && <span className="text-white ml-4">Orders</span>}
+          </div>
+        </Link>
 
-        <div className="flex items-center">
+        <Link to={'/admin/contact'}>
+          <div className="flex items-center">
           <img
             src={contact}
             alt="Contact"
@@ -57,17 +64,29 @@ const SideNav = () => {
           />
           {!isCollapsed && <span className="text-white ml-4">Contact</span>}
         </div>
+        </Link>
 
-        <div className="flex items-center">
-          <img
-            src={profile}
-            alt="Profile"
-            className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
-          />
-          {!isCollapsed && <span className="text-white ml-4">Profile</span>}
-        </div>
+        <Link to={"/Admin/user-search"}>
+          <div className="flex items-center">
+            <img
+              src={database}
+              alt="Database"
+              className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
+            />
+            {!isCollapsed && <span className="text-white ml-4">Database</span>}
+          </div>
+        </Link>
 
-        
+        <Link to={"/admin/profile"}>
+          <div className="flex items-center">
+            <img
+              src={profile}
+              alt="Profile"
+              className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
+            />
+            {!isCollapsed && <span className="text-white ml-4">Profile</span>}
+          </div>
+        </Link>
 
         <div className="flex items-center">
           <img

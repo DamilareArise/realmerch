@@ -19,6 +19,8 @@ import { CartProvider } from "./components/context/CartContext";
 import Cart from "./components/Cart";
 import AdminUserSearch from "./components/AdminDash/AdminUserSearch";
 import PaymentInvoice from "./components/Invoice";
+import AdminProfile from "./components/AdminDash/AdminProfile";
+import AdminContact from "./components/AdminDash/AdminContact";
 
 function App() {
   const firebaseConfig = {
@@ -122,8 +124,9 @@ function App() {
           <Route path="/admin/adminOrderList" element={<AdminOrderList />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/Admin/user-search" element={<AdminUserSearch />} />
-          <Route path="/invoice" element={<PaymentInvoice />} />
-
+          {/* <Route path="/invoice" element={<PaymentInvoice />} /> */}
+          <Route path="/admin/profile" element={<AdminProfile />} />
+          <Route path="/admin/contact" element={<AdminContact />} />
         </Routes>
       </CartProvider>
     </>
