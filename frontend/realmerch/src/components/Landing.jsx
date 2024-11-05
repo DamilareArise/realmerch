@@ -30,16 +30,16 @@ const Landing = () => {
 
       <div className="pt-[100px]  ">
         <div className="flex justify-between mb-[30px] px-[50px] text-[#FFFFFF]">
-          <div className="overflow-hidden rounded-3xl">
+          <div className="overflow-hidden rounded-3xl basis-[80%] md:basis-[100%] xl:basis-[80%]">
             <img
               src={landing}
               alt=""
-              height={250}
+              // height={250}
               
-              className="/h-[350px] hover:scale-[1.1] transition-all"
+              className="/h-[350px] hover:scale-[1.1] transition-all /h-[250px] "
             />
           </div>
-          <div className="py-[24px] bg-[#845649] pl-[24px] pr-[54px] flex flex-col gap-[23px]">
+          <div className="py-[24px] bg-[#845649] pl-[24px] pr-[54px] flex flex-col gap-[23px] md:hidden xl:block /h-[250px]">
             <p>All Categories</p>
             <div className="flex flex-col gap-[17px]">
               <span className="flex gap-[10px] items-center">
