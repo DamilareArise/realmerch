@@ -4,8 +4,8 @@
 
 @layer components {
   .custom-radio {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background-color: #99989833;
     border-radius: 50%;
     border: 2px solid #BDB8B8;
@@ -15,9 +15,9 @@
   }
 
   .custom-radio:checked {
-    background-color:#476A6F ;
+    background-color:#845649 ;
     padding: 1px  ;
-    border: 2px solid #020252;
+    border: 2px solid #BDB8B8;
     
   }
 }
