@@ -3,8 +3,8 @@ import deal from "./../assets/deal1.png";
 
 const PromoBanner = () => {
   return (
-    <div className=" w-full p-8">
-      <div className=" flex justify-between items-center gap-[20px]">
+    <div className=" w-full p-[24px] md:p-8">
+      <div className="flex-col md:flex-row flex justify-between items-center gap-[20px]">
         {/* Left Promo Block */}
         <div
           className="flex items-center space-x-4 bg-white p-6 rounded-lg hover:shadow-2xl hover:scale-[1.05] basis-1/2 transition-all"
@@ -42,7 +42,7 @@ const PromoBanner = () => {
             />
           </div>
           <div className="flex-1">
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-[1.30rem] lg:text-2xl font-bold">
               Buy 2 fashion items and get 2% off delivery fees
             </h2>
             <p className="mt-2 text-sm">T&Cs Apply</p>
