@@ -36,18 +36,19 @@ const AdminDashboard = () => {
 
         <div className="w-[10%]"></div>
 
-        <div className="flex flex-col gap-[68px] /ml-[150px] w-[90%] px-[20px]">
-          <div className="flex justify-end mb-[52px]">
+        <div className="flex flex-col gap-[38px] /ml-[150px] w-[90%] px-[20px]">
+          <div className="flex justify-end mb-[22px]">
             <a
               to={"/admindisplay"}
-              className="px-[23px] py-[11px] bg-[#845649] rounded-[25px] flex gap-[10px] shadow-md shadow-[#00000040] text-[#ffffff]"
+              className="px-[23px] py-[8px] bg-[#845649] rounded-[25px] flex gap-[10px] items-center shadow-md shadow-[#00000040] text-[#ffffff]"
             >
               <img src={upload} alt="" />
-              <p className="font-[400] text-[20px] leading-[24.2px]">
+              <p className="font-[400] text-[18px] leading-[22.2px]">
                 Upload Carousel
               </p>
             </a>
           </div>
+          <p className="self-start font-[500] text-[28px] leading-[34px] ">Dashboard</p>
           <div className="py-[24px] px-[16px] inline-flex gap-[15px] bg-[#845649] rounded-[17px] w-fit text-white">
             <img src={adProfile} alt="" />
             <span className="flex flex-col gap-[10px]">

@@ -229,26 +229,26 @@ const SignUp = ({ info }) => {
 
       {/* <div className="basis-1/2 bg-[#476A6F] rounded-bl-[250px]"></div> */}
 
-      <div className="flex justify-center items-center w-[90%] h-[90%] bg-[#F2E3DD] ">
-        <div className="basis-1/2 p-[24px] flex flex-col">
+      <div className="flex justify-center items-center w-[95%] lg:w-[90%] h-[95%] lg:h-[90%] bg-[#F2E3DD] ">
+        <div className="lg:basis-1/2 p-[12px] lg:p-[24px] flex flex-col">
           
           <div className="flex flex-col items-center">
           <div className="mb-[12px]  flex flex-col justify-center items-start gap-[18px] w-[80%]">
-            <p className="font-[500] text-[20px] leading-[17.5px]">
+            <p className="font-[500] text-[18px] md:text-[20px] leading-[17.5px]">
               Join Real Merch Today!
             </p>
-            <p className="font-[400] text-[16px] leading-[18px]">
-              Create an account to unlock an <br /> unlimited shopping
+            <p className="font-[400] text-[12px] md:text-[16px] leading-[18px]">
+              Create an account to unlock an <br className="hidden lg:block"/> unlimited shopping
               experience
             </p>
           </div>
-            <form onSubmit={handleSubmit} className="flex flex-col w-[487px]">
+            <form onSubmit={handleSubmit} className="flex flex-col md:w-[380px] lg:w-[487px]">
               <div className="flex items-center border-[1px] border-[#808080] gap-[17.43px] rounded-[30px] px-[25.56px] shadow-md shadow-[#00000040] mb-[10px]">
                 <img src={full} alt="Full Name" width={22.07} height={17.43} />
                 <input
                   type="text"
                   placeholder="Fullname"
-                  className="py-[12px] border-none outline-none w-full placeholder:text-[14px] bg-[#f2e3dd]"
+                  className="py-[8px] lg:py-[12px] border-none outline-none w-full placeholder:text-[10px] md:placeholder:text-[14px] bg-[#f2e3dd]"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
@@ -261,7 +261,7 @@ const SignUp = ({ info }) => {
                   <input
                     type="email"
                     placeholder="Email"
-                    className="py-[12px] border-none outline-none w-full placeholder:text-[14px] bg-[#f2e3dd]"
+                    className="py-[8px] lg:py-[12px] border-none outline-none w-full placeholder:text-[10px] md:placeholder:text-[14px] bg-[#f2e3dd]"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -282,7 +282,7 @@ const SignUp = ({ info }) => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="py-[12px] border-none outline-none w-full placeholder:text-[14px] bg-[#f2e3dd]"
+                  className="py-[8px] lg:py-[12px] border-none outline-none w-full placeholder:text-[10px] md:placeholder:text-[14px] bg-[#f2e3dd]"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -300,7 +300,7 @@ const SignUp = ({ info }) => {
                   <input
                     type="password"
                     placeholder="Confirm Password"
-                    className="py-[12px] border-none outline-none w-full placeholder:text-[14px] bg-[#f2e3dd]"
+                    className="py-[8px] lg:py-[12px] border-none outline-none w-full placeholder:text-[10px] md:placeholder:text-[14px] bg-[#f2e3dd]"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
@@ -318,21 +318,21 @@ const SignUp = ({ info }) => {
                   className="/mr-2 custom-radio"
                   required
                 />
-                <p className="font-[400] text-[16px] ml-[4px]">
+                <p className="font-[400] text-[12px] md:text-[16px] ml-[4px]">
                   Agree to Terms and conditions
                 </p>
               </label>
 
               <button
                 type="submit"
-                className="bg-[#845649] rounded-[20px] py-[14px] text-[16px] font-[500] text-white mt-[20px]"
+                className="bg-[#845649] rounded-[20px] py-[8px] lg:py-[14px] text-[12px] md:text-[16px] font-[500] text-white mt-[20px]"
                 onClick={signUpUser}
               >
                 {loading ? "Loading..." : "Sign up"}
               </button>
             </form>
 
-            <span className="flex gap-[56px] mt-[30px] justify-center">
+            <span className="flex gap-[30px] md:gap-[56px] mt-[15px] lg:mt-[30px] justify-center">
               <button>
                 <img
                   src={google}
@@ -363,16 +363,16 @@ const SignUp = ({ info }) => {
               </button>
             </span>
 
-            <span className="flex justify-center items-center py-[16px] gap-[8px]">
-              <p className="font-[400] text-[16px]">Already a member?</p>
-              <Link to={"/"} className="text-[#476A6F] font-[500] text-[20px]">
+            <span className="flex justify-center items-center py-[8px] lg:py-[16px] gap-[8px]">
+              <p className="font-[400] text-[12px] md:text-[16px]">Already a member?</p>
+              <Link to={"/"} className="text-[#845649] font-[500] text-[16px] md:text-[20px]">
                 Login
               </Link>
             </span>
           </div>
         </div>
         <div
-          className="basis-1/2 h-full bg-center bg-cover"
+          className="basis-1/2 h-full bg-center bg-cover hidden lg:block"
           style={{
             backgroundImage: `url(${signmg})`,
           }}

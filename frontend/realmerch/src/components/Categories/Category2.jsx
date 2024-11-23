@@ -9,11 +9,11 @@ import PromoBanner from "../PromoBanner";
 const Category2 = () => {
   return (
     <div>
-      <div className="py-[33px] bg-[#FFFFFF] px-[58px] text-[24px] font-[500]">
+      <div className="py-[33px] bg-[#FFFFFF] /pb-[35px] pl-[24px]  md:px-[24px] lg:px-[50px] text-[24px] font-[500]">
         <a href="/category2">Today’s Deal</a>
       </div>
 
-      <div className="px-[50px]">
+      <div className="/pb-[35px] pl-[24px]  md:px-[24px] lg:px-[50px]">
         <Splide
           aria-label="Most Viewed"
           className="py-[16px] /bg-[#0000001A] bg-gradient-to-b to-[#0000001A] from-[#fbf0f0]"

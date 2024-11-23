@@ -27,9 +27,9 @@ const Card = () => {
   };
 
   return (
-    <div className="flex flex-col  w-[340px] shadow-2xl shadow-[#0000001A]">
-      <div className="py-[15px] px-[30px] bg-[#F2E3DD] rounded-t-[12px] flex justify-center">
-        <img src={mock} alt="" width={200} />
+    <div className="flex flex-col w-[270px] lg:w-[340px] shadow-2xl shadow-[#0000001A]">
+      <div className="lg:py-[15px] lg:px-[30px] bg-[#F2E3DD] rounded-t-[12px] flex justify-center">
+        <img src={mock} alt="" width={200} className="w-[160px] lg:w-[200px]"/>
       </div>
 
       <div className="p-[14px] flex flex-col gap-[10px] rounded-b-[12px] bg-[#FFFFFF]">
@@ -47,7 +47,7 @@ const Card = () => {
           </span>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <code className="text-[20px] font-[500] leading-[16px]">$ 6,500</code>
           <button
             className="bg-[#845649] text-[#F2E3DD] py-[6px] px-[26px] rounded-[18px]"
