@@ -13,8 +13,8 @@ const PromoBanner = () => {
           }}
         >
           <div className="flex-1 ">
-            <h2 className="text-3xl font-bold">10% Off</h2>
-            <p className="mt-2 text-lg">
+            <h2 className="text-lg md:text-3xl font-bold">10% Off</h2>
+            <p className="text-xs mt-2 md:text-lg">
               On branded phone accessories every Thursday this November
             </p>
           </div>
@@ -42,10 +42,10 @@ const PromoBanner = () => {
             />
           </div>
           <div className="flex-1">
-            <h2 className="text-[1.30rem] lg:text-2xl font-bold">
+            <h2 className="text-lg md:text-[1.30rem] lg:text-2xl font-bold">
               Buy 2 fashion items and get 2% off delivery fees
             </h2>
-            <p className="mt-2 text-sm">T&Cs Apply</p>
+            <p className="mt-2 md:text-sm ">T&Cs Apply</p>
           </div>
         </div>
       </div>
