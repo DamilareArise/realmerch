@@ -19,7 +19,7 @@ const Recommended = () => {
       options={{
         type: "loop",
         autoplay: false,
-        gap: "2rem",
+        gap: "1rem",
         arrows: true,
         pagination: false,
         perPage: 6.5,

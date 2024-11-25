@@ -1,6 +1,7 @@
 // import React from 'react'
 
 import Navbar from "./Navbar";
+
 import search from "./../assets/search.svg";
 import landing from "./../assets/landingimg.png";
 import female from "./../assets/female.svg";
@@ -29,14 +30,15 @@ const Landing = () => {
     <div className="bg-[#fbf0f0] ">
       <Navbar />
 
-      <span className="flex md:hidden gap-[11px] py-[8px] pl-[22px] border-[1px] border-[#000000] rounded-[19px] mt-[65px] mx-[24px]">
-          <img src={search} alt="" />
+      <span className="flex items-center md:hidden gap-[11px] py-[8px] pl-[22px] border-[1px] border-[#000000] rounded-[19px] mt-[65px] mx-[24px]">
+          {/* <img src={search} alt="" /> */}
+          <i className="fa-solid fa-magnifying-glass text-[#845649]"></i>
           <input
             type="search"
             name=""
             id=""
             placeholder="Search"
-            className="bg-transparent border-none outline-none w-[380px] placeholder:text-[#000000] placeholder:font-bold"
+            className="bg-transparent border-none outline-none w-[380px] placeholder:text-[#845649] placeholder:font-bold"
           />
         </span>
 
