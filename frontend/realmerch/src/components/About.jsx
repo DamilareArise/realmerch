@@ -2,7 +2,7 @@
 
 const About = () => {
   return (
-    <div className="px-[30px] lg:px-[59px] py-[35px] lg:py-[70px] bg-[#F2E3DD] shadow-2xl shadow-[#0000001A] rounded-[10px] ">
+    <div className="px-[10px] md:px-[30px] lg:px-[59px] py-[10px] md:py-[35px] lg:py-[70px] bg-[#F2E3DD] shadow-2xl shadow-[#0000001A] rounded-[10px] ">
       <p className="text-[20px] lg:text-[28px] font-[500]">About Us</p>
 
       <p className="text-[14px] lg:text-[20px]">
