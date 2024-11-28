@@ -10,7 +10,7 @@ import office from "./../assets/office.svg";
 import home from "./../assets/home.svg";
 import promo from "./../assets/promotional.svg";
 import others from "./../assets/others.svg";
-import Category1 from "./Categories/category1";
+import Category1 from "./Categories/Category1";
 import Category2 from "./Categories/Category2";
 // import Event from "./Events/Event";
 import Recommended from "./Categories/Recommended";
