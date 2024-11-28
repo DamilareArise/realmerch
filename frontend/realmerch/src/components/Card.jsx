@@ -20,10 +20,11 @@ const Card = () => {
 
   // Define item details
   const item = {
-    id: 1, // You may want to use a unique ID for each product
+    id: Math.ceil(Math.random()), 
     name: "Men T-shirt",
     price: 6500,
-    quantity: num
+    quantity: num,
+    image: mock
   };
 
   return (

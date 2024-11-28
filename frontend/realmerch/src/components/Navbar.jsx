@@ -84,7 +84,7 @@ const Navbar = () => {
           <img src={cart} alt="" />
 
           <p className="hidden md:block">Cart</p>
-          <span className="absolute top-[10px] md:top-[20px] right-[15%] md:right-[25px] bg-red-500 text-white rounded-full text-xs px-2 py-1">
+          <span className="absolute top-[10px] md:top-[20px] right-[15%] md:right-[50px] lg:right-[25px] bg-red-500 text-white rounded-full text-xs px-2 py-1">
             {cartItems.length}
           </span>
         </Link>
