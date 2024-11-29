@@ -11,6 +11,7 @@ import { CartContext } from "./context/CartContext";
 const Navbar = () => {
   const [email, setemail] = useState("");
   const [profile, setprofile] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const auth = getAuth();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -41,12 +42,15 @@ const Navbar = () => {
       });
   };
   const { cartItems } = useContext(CartContext);
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   return (
     <div className="bg-[#845649] py-[17px] px-[24px] lg:px-[54px] fixed top-0 w-full z-[100000] flex items-center justify-between text-[#FFFFFF]">
       <img src={logo} alt="logo" className="h-[20px] md:h-[25px] lg:h-fit" />
       <div className="  flex items-center justify-end gap-[20px]  md:gap-[40px] ">
-        <span className="hidden md:flex gap-[11px] py-[8px] pl-[22px] border-[1px] border-[#FFFFFF] rounded-[19px] md:w-[300px] lg:w-[420px]">
+        <span className="hidden md:flex  gap-[11px] py-[8px] pl-[22px] border-[1px] border-[#FFFFFF] rounded-[19px] md:w-[300px] lg:w-[420px]">
           <img src={search} alt="" />
           <input
             type="search"
@@ -57,8 +61,8 @@ const Navbar = () => {
           />
         </span>
 
-        <div className="flex gap-[13px] items-center">
-          {profile ? (
+        <div className="flex gap-[13px] items-center" onClick={toggleDropdown}>
+          {/* {profile ? (
             <img src={profile} alt="" width={50} className="rounded-[100px]" />
           ) : (
             <img src={profilee} alt="" />
@@ -69,7 +73,8 @@ const Navbar = () => {
               <a href=""> {email} </a>{" "}
               <a href="" onClick={handleLogout}>
                 {" "}
-                Logout{" "}
+               
+                <i className="fa-solid fa-arrow-right-from-bracket ml-[5px]"></i>
               </a>{" "}
             </div>
           ) : (
@@ -77,6 +82,57 @@ const Navbar = () => {
               {" "}
               Login{" "}
             </Link>
+          )} */}
+
+          {profile ? (
+            <div className="flex gap-[4px] items-center cursor-pointer">
+              <img src={profile} alt="" width={50} className="rounded-[100px]" />
+              <p className="text-sm">Hi, </p>
+            </div>
+            
+          ) : (
+            <img src={profilee} alt="" />
+          )}
+
+          {dropdownOpen && (
+            <div className="absolute top-[70%] right-[5%] mt-2 bg-white text-black shadow-md rounded-lg py-2 w-48">
+              <ul>
+                <li className="px-4 py-2 hover:bg-gray-100">
+                  <>
+                    {email ? (
+                      <div className="text-[10px] md:text-[14px]">
+                        <a href=""> {email} </a>{" "}
+                      </div>
+                    ) : (
+                      <Link to={"/login"} className="hidden md:block">
+                        {" "}
+                        Login{" "}
+                      </Link>
+                    )}
+                  </>
+                </li>
+
+                {/* <li className="px-4 py-2 hover:bg-gray-100">
+                  <Link to="/login">Login</Link>
+                </li> */}
+
+                {/* <li className="px-4 py-2 hover:bg-gray-100">
+                  <Link to="/inbox">Inbox</Link>
+                </li> */}
+                <li className="px-4 py-2 hover:bg-gray-100">
+                  <Link to="/saved" className="text-[10px] md:text-[14px]">Account</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-100">
+                  <Link to="/voucher" className="text-[10px] md:text-[14px]">Orders</Link>
+                </li>
+                <li className="px-4 py-2 text-red-500 hover:bg-gray-100" onClick={handleLogout}>
+                  <button  className="flex items-center gap-[4px]">
+                    <p className="text-[10px] md:text-[14px]">Logout</p>
+                    <i className="fa-solid fa-arrow-right-from-bracket ml-[5px]"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
           )}
         </div>
 
