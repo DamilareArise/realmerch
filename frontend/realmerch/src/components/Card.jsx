@@ -49,7 +49,7 @@ const Card = () => {
         </div>
 
         <div className="flex justify-between items-center">
-          <code className="text-[12px] md:text-[20px] font-[500] leading-[16px]">$ 6,500</code>
+          <code className="text-[12px] md:text-[20px] font-[500] leading-[16px]"><i className="fa-solid fa-naira-sign"></i>{" "}6,500</code>
           <button
             className="bg-[#845649] text-[12px] md:text-[16px] text-[#F2E3DD] py-[6px] px-[26px] rounded-[18px]"
             onClick={() => addToCart(item)} // Add item to cart on button click

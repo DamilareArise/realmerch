@@ -87,11 +87,18 @@ const Navbar = () => {
           {profile ? (
             <div className="flex gap-[4px] items-center cursor-pointer">
               <img src={profile} alt="" width={50} className="rounded-[100px]" />
-              <p className="text-sm">Hi, </p>
+              <p className="text-sm">Hi, Sabinwa </p>
+              <i className="fa-solid fa-angle-down text-white"></i>
             </div>
             
           ) : (
-            <img src={profilee} alt="" />
+            
+            <div className="flex gap-[4px] items-center cursor-pointer">
+              <img src={profilee} alt="" />
+              <p className="text-sm">Hi, Guest </p>
+              <i className="fa-solid fa-angle-down text-white"></i>
+            </div>
+            
           )}
 
           {dropdownOpen && (
@@ -102,11 +109,13 @@ const Navbar = () => {
                     {email ? (
                       <div className="text-[10px] md:text-[14px]">
                         <a href=""> {email} </a>{" "}
+                        <i className="fa-solid fa-angle-down"></i>
                       </div>
                     ) : (
-                      <Link to={"/login"} className="hidden md:block">
+                      <Link to={"/login"} className="/hidden /md:block text-[10px] md:text-[14px]">
                         {" "}
                         Login{" "}
+                        
                       </Link>
                     )}
                   </>
