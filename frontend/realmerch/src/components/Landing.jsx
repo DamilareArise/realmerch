@@ -22,15 +22,12 @@ import Footer from "./Footer";
 // import female from './../assets/female.svg'
 
 const Landing = () => {
-
-  
-
-
   return (
     <div className="bg-[#fbf0f0] ">
       <Navbar />
 
-      <span className="flex items-center md:hidden gap-[11px] py-[8px] pl-[22px] border-[1px] border-[#000000] rounded-[19px] mt-[65px] mx-[24px]">
+      <span className=" bg-[#fbf0f0] ">
+        <span className="flex items-center md:hidden gap-[11px] py-[8px] pl-[22px] border-[1px] border-[#000000] mt-[85px] rounded-[19px]  mx-[24px]">
           {/* <img src={search} alt="" /> */}
           <i className="fa-solid fa-magnifying-glass text-[#845649]"></i>
           <input
@@ -41,16 +38,16 @@ const Landing = () => {
             className="bg-transparent border-none outline-none w-[380px] placeholder:text-[#845649] placeholder:font-bold"
           />
         </span>
+      </span>
 
       <div className="pt-[35px] md:pt-[100px]  ">
-      
         <div className="flex justify-between mb-[30px] px-[24px] lg:px-[50px] text-[#FFFFFF] gap-[30px]">
           <div className="overflow-hidden rounded-3xl basis-[100%] md:basis-[100%] lg:basis-[80%]">
             <img
               src={landing}
               alt=""
               // height={250}
-              
+
               className="/h-[350px] /hover:scale-[1.1] rounded-3xl transition-all /h-[200px] w-full "
             />
           </div>
@@ -90,43 +87,37 @@ const Landing = () => {
           </div>
         </div>
 
-
-
-       
         <div className=" pb-[35px] pl-[24px]  md:px-[24px] lg:px-[50px]">
-        <Category1/>
+          <Category1 />
         </div>
 
-
         <div className=" pb-[30px]">
-        <Category2/>
+          <Category2 />
         </div>
 
         {/* <div>
           <Event/>
         </div> */}
 
-
         <div>
-          <Recommended/>
+          <Recommended />
         </div>
 
         <div className="px-[24px] lg:px-[50px] /pt-[16px]">
-          <Ads/>
+          <Ads />
         </div>
 
         <div className="px-[24px] lg:px-[50px] pt-[30px] pb-[44px]  bg-gradient-to-b to-[#0000001A] from-[#fbf0f0]">
-          <About/>
+          <About />
         </div>
 
         <div className="pb-[20px]">
-          <Contact/>
+          <Contact />
         </div>
 
         <div>
-          <Footer/>
+          <Footer />
         </div>
-    
       </div>
     </div>
   );
