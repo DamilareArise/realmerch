@@ -36,22 +36,54 @@ const AdminDashboard = () => {
       page: "Payments",
       date: "10-07-2024",
     },
+    // {
+    //   id: 4,
+    //   detail: "Downloaded Invoice",
+    //   action: "Download",
+    //   page: "Invoices",
+    //   date: "12-07-2024",
+    // },
+    // {
+    //   id: 5,
+    //   detail: "Logged Out",
+    //   action: "Logout",
+    //   page: "Dashboard",
+    //   date: "15-07-2024",
+    // },
+  ];
+  const userActivities = [
+    {
+      id: 1,
+      name: "John Doe",
+      activity: "Logged in",
+      time: "09:00 AM",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      activity: "Viewed Dashboard",
+      time: "09:15 AM",
+    },
+    {
+      id: 3,
+      name: "Michael Johnson",
+      activity: "Updated Profile",
+      time: "10:00 AM",
+    },
     {
       id: 4,
-      detail: "Downloaded Invoice",
-      action: "Download",
-      page: "Invoices",
-      date: "12-07-2024",
+      name: "Emily Davis",
+      activity: "Logged out",
+      time: "10:30 AM",
     },
-    {
-      id: 5,
-      detail: "Logged Out",
-      action: "Logout",
-      page: "Dashboard",
-      date: "15-07-2024",
-    },
+    // {
+    //   id: 5,
+    //   name: "Chris Brown",
+    //   activity: "Accessed Reports",
+    //   time: "11:00 AM",
+    // },
   ];
-  let users = null;
+  
   const auth = getAuth();
   // const navigate = useNavigate()
 
@@ -316,7 +348,7 @@ const AdminDashboard = () => {
             <table className="w-full text-left mb-4 border-collapse">
               <thead>
                 <tr className="/bg-gray-200">
-                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b  text-[10px] md:text-[16px] font-[500]">
                     S/N
                   </th>
                   <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
@@ -339,19 +371,19 @@ const AdminDashboard = () => {
                     key={activity.id}
                     className={`${index % 2 === 0 ? "bg-gray-100" : ""}`}
                   >
-                    <td className="px-[4px] md:px-3 py-5 border-b text-[10px] md:text-[14px] font-[400]">
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
                       {index + 1}
                     </td>
-                    <td className="px-[4px] md:px-3 py-5 border-b text-[10px] md:text-[14px] font-[400]">
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
                       {activity.detail}
                     </td>
-                    <td className="px-[4px] md:px-3 py-5 border-b text-[10px] md:text-[14px] font-[400]">
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
                       {activity.action}
                     </td>
-                    <td className="px-[4px] md:px-3 py-5 border-b text-[10px] md:text-[14px] font-[400]">
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
                       {activity.page}
                     </td>
-                    <td className="px-[4px] md:px-3 py-5 border-b text-[10px] md:text-[14px] font-[400]">
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
                       {activity.date}
                     </td>
                   </tr>
@@ -359,6 +391,62 @@ const AdminDashboard = () => {
               </tbody>
             </table>
           </div>
+
+
+
+          <div>
+            <p className="text-[34px] font-[500] mb-[24px]">
+              View Users
+            </p>
+
+            <table className="w-full text-left mb-4 border-collapse">
+              <thead>
+                <tr className="bg-[#845649] text-white">
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                    S/N
+                  </th>
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                  User’s Name
+                  </th>
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                  Activity
+                  </th>
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                  Time
+                  </th>
+                  {/* <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                    Date
+                  </th> */}
+                </tr>
+              </thead>
+              <tbody>
+                {userActivities.map((userActivity, index) => (
+                  <tr
+                    key={userActivity.id}
+                    // className={`${index % 2 === 0 ? "bg-gray-100" : ""}`}
+                    className="bg-[#FFFFFF]"
+                  >
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {index + 1}
+                    </td>
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {userActivity.name}
+                    </td>
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {userActivity.activity}
+                    </td>
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {userActivity.time}
+                    </td>
+                    
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+
+          <TopSellingSection/>
         </div>
       </div>
     </div>
