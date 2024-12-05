@@ -31,7 +31,7 @@ const SalesChart = () => {
       style={{ width: "100%", height: 400 }}
       className="bg-white rounded-[14px] px-[24px] py-[16px] shadow-xl shadow-[#0000001A]"
     >
-      <h2 className="text-[#292929] text-[28px] font-[700]">Sales Details</h2>
+      <h2 className="text-[#292929] text-[30px] font-[700]">Sales Details</h2>
       <div className="flex /flex-col gap-[8px] /justify-center">
         <h1 className="text-[#292929] font-[700] text-[24px]">$10,000</h1>
         <span className="text-[#4CE13F] flex items-center gap-[8px]">
