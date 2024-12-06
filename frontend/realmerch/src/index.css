@@ -121,6 +121,20 @@ li img{
   .textt{
     font-size: 10px;
   }
+
+  .topSeller{
+    width: 170px;
+  }
+
+  .topPrice{
+    font-size: 10px;
+  }
+  .topButton{
+    font-size: 7px;
+  }
+  .topName{
+    font-size: 10px;
+  }
 }
 @media (max-width: 376px){
   .boxx{
@@ -129,6 +143,19 @@ li img{
 
   .textt{
     font-size: 11px;
+  }
+  .topSeller{
+    width: 150px;
+  }
+
+  .topPrice{
+    font-size: 10px;
+  }
+  .topButton{
+    font-size: 7px;
+  }
+  .topName{
+    font-size: 10px;
   }
 }
 
@@ -140,6 +167,20 @@ li img{
   .textt{
     font-size: 11px;
   }
+
+  .topSeller{
+    width: 150px;
+  }
+
+  .topPrice{
+    font-size: 10px;
+  }
+  .topButton{
+    font-size: 7px;
+  }
+  .topName{
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 350px){
@@ -148,5 +189,19 @@ li img{
   }
   .textt{
     font-size: 9px;
+  }
+
+  .topSeller{
+    width: 130px;
+  }
+
+  .topPrice{
+    font-size: 10px;
+  }
+  .topButton{
+    font-size: 7px;
+  }
+  .topName{
+    font-size: 10px;
   }
 }
