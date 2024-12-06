@@ -101,13 +101,13 @@ const AdminDashboard = () => {
     <div>
       <SideNav />
 
-      <div className="pt-[41px] /px-[20px] /md:px-[50px] bg-[#F9F2F2] flex">
+      <div className="pt-[41px] /px-[20px] /md:px-[50px] bg-[#FFFFFF] md:bg-[#F9F2F2] flex">
         {/* <Navbar/> */}
 
-        <div className="w-[10%]"></div>
+        <div className="hidden md:block md:w-[13%] lg:w-[10%]"></div>
 
-        <div className="flex flex-col gap-[38px] /ml-[150px] w-[90%] px-[20px]">
-          <p className="self-start font-[500] text-[22px] leading-[32px] ">
+        <div className="flex flex-col gap-[20px] md:gap-[38px] /ml-[150px] md:w-[87%] lg:w-[90%] px-[20px]">
+          <p className="self-start font-[500] text-[20px] md:text-[30px] text-black leading-[30px] mb-[20px] mt-[30px]">
             Dashboard
           </p>
           <div className="flex justify-end mb-[22px]">
@@ -122,76 +122,76 @@ const AdminDashboard = () => {
             </a>
           </div>
 
-          <div className="flex justify-between text-white">
-            <div className="bg-[#845649] p-[24px] rounded-[16px] w-[274px]  flex flex-col gap-[8px]">
+          <div className="flex justify-between gap-[8px] text-white flex-wrap md:flex-nowrap">
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
               <div className="flex justify-between items-center">
                 <span className="flex flex-col">
-                  <p>Total user</p>
-                  <p className="text-[24px] font-[600]">523,456</p>
+                  <p className="text-[12px] lg:text-[14px]">Total user</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">523,456</p>
                 </span>
 
-                <span className="py-[10px] px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
                   <i className="fa-solid fa-user text-white "></i>
                 </span>
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <i className="fa-solid fa-arrow-trend-up"></i>
-                <p className="text-[16px] ">5.5% Up from last month</p>
+                <p className="text-[12px] lg:text-[16px] ">5.5% Up from last month</p>
               </div>
             </div>
 
-            <div className="bg-[#845649] p-[24px] rounded-[16px] w-[274px]  flex flex-col gap-[8px]">
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
               <div className="flex justify-between items-center">
                 <span className="flex flex-col">
-                  <p>Total Order</p>
-                  <p className="text-[24px] font-[600]">11,000</p>
+                  <p className="text-[12px] lg:text-[14px]">Total Order</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">11,000</p>
                 </span>
 
-                <span className="py-[10px] px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
                   <i className="fa-solid fa-gift text-white"></i>
                 </span>
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <i className="fa-solid fa-arrow-trend-up"></i>
-                <p className="text-[16px] ">2.5% Up from last week</p>
+                <p className="text-[12px] lg:text-[16px] ">2.5% Up from last week</p>
               </div>
             </div>
 
-            <div className="bg-[#845649] p-[24px] rounded-[16px] w-[274px]  flex flex-col gap-[8px]">
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
               <div className="flex justify-between items-center">
                 <span className="flex flex-col">
-                  <p>Total Sales</p>
-                  <p className="text-[24px] font-[600]">10,000</p>
+                  <p className="text-[12px] lg:text-[14px]">Total Sales</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">10,000</p>
                 </span>
 
-                <span className="py-[10px] px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
                   <i className="fa-solid fa-user text-white "></i>
                 </span>
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <i className="fa-solid fa-arrow-trend-up"></i>
-                <p className="text-[16px] ">8.5% Up from last week</p>
+                <p className="text-[12px] lg:text-[16px] ">8.5% Up from last week</p>
               </div>
             </div>
 
-            <div className="bg-[#845649] p-[24px] rounded-[16px] w-[274px]  flex flex-col gap-[8px]">
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
               <div className="flex justify-between items-center">
                 <span className="flex flex-col">
-                  <p>Total Pending</p>
-                  <p className="text-[24px] font-[600]">10,000</p>
+                  <p className="text-[12px] lg:text-[14px]">Total Pending</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">10,000</p>
                 </span>
 
-                <span className="py-[10px] px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
                   <i className="fa-solid fa-user text-white "></i>
                 </span>
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <i className="fa-solid fa-arrow-trend-up"></i>
-                <p className="text-[16px] ">4.5% Up from last week</p>
+                <p className="text-[12px] lg:text-[16px] ">4.5% Up from last week</p>
               </div>
             </div>
           </div>
@@ -200,33 +200,33 @@ const AdminDashboard = () => {
 
           {/* customer data */}
           <div className="flex flex-col mt-[24px] mb-[50px]">
-            <p className="text-[#000] font-[500] text-[30px] mb-[12px]">
+            <p className="text-[#000] font-[500] text-[20px] md:text-[30px] mb-[12px] ">
               Customer Data
             </p>
 
-            <div className="flex justify-between">
-              <div className="flex gap-[18px] text-white items-center rounded-[16px] py-[18px] px-[24px] bg-[#845649]">
+            <div className="flex justify-between gap-[8px] flex-wrap md:flex-nowrap">
+              <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
                 <i className="fa-solid fa-user text-white "></i>
                 <span className="flex flex-col gap-[8px]">
-                  <p className="font-[500] text-[18px]">New Customers</p>
+                  <p className="font-[500] text-[14px] lg:text-[18px]">New Customers</p>
                   <p className="text-[16px]">523,456</p>
                 </span>
               </div>
 
-              <div className="flex gap-[18px] text-white items-center rounded-[16px] py-[18px] px-[24px] bg-[#845649]">
+              <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
                 <i className="fa-solid fa-user text-white "></i>
                 <span className="flex flex-col gap-[8px]">
-                  <p className="font-[500] text-[18px]">
+                  <p className="font-[500] text-[14px] lg:text-[18px]">
                     Total Registered Customers
                   </p>
                   <p className="text-[16px]">523,456</p>
                 </span>
               </div>
 
-              <div className="flex gap-[18px] text-white items-center rounded-[16px] py-[18px] px-[24px] bg-[#845649]">
+              <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
                 <img src={activity} alt="" />
                 <span className="flex flex-col gap-[8px]">
-                  <p className="font-[500] text-[18px]">Customer Value</p>
+                  <p className="font-[500] text-[14px] lg:text-[18px]">Customer Value</p>
                   <p className="text-[16px]">90%</p>
                 </span>
               </div>
@@ -236,70 +236,70 @@ const AdminDashboard = () => {
           {/* payment overview */}
 
           <div>
-            <p className="text-[34px] font-[500] mb-[24px]">Payment Overview</p>
+            <p className="text-[20px] md:text-[34px] font-[500] mb-[14px] md:mb-[24px]">Payment Overview</p>
 
-            <div className="flex gap-[50px]">
+            <div className="flex /flex-col lg:flex-row gap-[16px] xl:gap-[50px] flex-wrap md:flex-nowrap">
               <div>
-                <p className="font-[500] text-[20px] text-black leading-[30px] mb-[20px]">
+                <p className="font-[500] text-[14px] md:text-[20px] text-black leading-[30px] md:mb-[20px]">
                   Recent Payments
                 </p>
-                <div>
-                  <div className="flex w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                <div className="w-[280px] md:w-[340px] lg:w-[450px] xl:w-[584px]">
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
                     <div className="flex">
                       <img src={payment} alt="" />
                       <span className="flex flex-col">
-                        <p>Payment ID: 1234</p>
-                        <p>Amount: $20</p>
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
                       </span>
                     </div>
 
                     <span className="flex items-center gap-[8px]">
-                      <p className="font-[500] text-[16px]">Successful</p>
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
                       <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
                     </span>
                   </div>
 
-                  <div className="flex w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
                     <div className="flex">
                       <img src={payment} alt="" />
                       <span className="flex flex-col">
-                        <p>Payment ID: 1234</p>
-                        <p>Amount: $20</p>
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
                       </span>
                     </div>
 
                     <span className="flex items-center gap-[8px]">
-                      <p className="font-[500] text-[16px]">Successful</p>
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
                       <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
                     </span>
                   </div>
 
-                  <div className="flex w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
                     <div className="flex">
                       <img src={payment} alt="" />
                       <span className="flex flex-col">
-                        <p>Payment ID: 1234</p>
-                        <p>Amount: $20</p>
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
                       </span>
                     </div>
 
                     <span className="flex items-center gap-[8px]">
-                      <p className="font-[500] text-[16px]">Successful</p>
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
                       <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
                     </span>
                   </div>
 
-                  <div className="flex w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
                     <div className="flex">
                       <img src={payment} alt="" />
                       <span className="flex flex-col">
-                        <p>Payment ID: 1234</p>
-                        <p>Amount: $20</p>
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
                       </span>
                     </div>
 
                     <span className="flex items-center gap-[8px]">
-                      <p className="font-[500] text-[16px]">Successful</p>
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
                       <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
                     </span>
                   </div>
@@ -307,13 +307,13 @@ const AdminDashboard = () => {
               </div>
 
               <div>
-                <p className="font-[500] text-[20px] text-black leading-[30px] mb-[20px]">
+                <p className="font-[500] text-[14px] md:text-[20px] text-black leading-[30px] /mb-[12px] md:mb-[20px]">
                   Refunds/ Returns
                 </p>
 
                 <div className="flex gap-[20px]">
                   <div className="border-[1.41px] border-[#0000001A] rounded-[8px] p-[18px] shadow-md shadow-[#00000040]">
-                    <p className="text-[#00000080] text-[16px] leading-[26px]">
+                    <p className="text-[#00000080] text-[12px] lg:text-[16px] leading-[26px]">
                       Total Items Returned
                     </p>
                     <p className="text-black font-[500] text-[26px] leading-[34px]">
@@ -325,7 +325,7 @@ const AdminDashboard = () => {
                   </div>
 
                   <div className="border-[1.41px] border-[#0000001A] rounded-[8px] p-[18px] shadow-md shadow-[#00000040]">
-                    <p className="text-[#00000080] text-[16px] leading-[26px]">
+                    <p className="text-[#00000080] text-[12px] lg:text-[16px] leading-[26px]">
                       Avg. Monthly Refunds
                     </p>
                     <p className="text-black font-[500] text-[26px] leading-[34px]">
@@ -341,7 +341,7 @@ const AdminDashboard = () => {
           </div>
 
           <div>
-            <p className="text-[34px] font-[500] mb-[24px]">
+            <p className="text-[20px] md:text-[34px] font-[500] mb-[14px] md:mb-[24px]">
               Recent Activities
             </p>
 
@@ -395,7 +395,7 @@ const AdminDashboard = () => {
 
 
           <div>
-            <p className="text-[34px] font-[500] mb-[24px]">
+            <p className="text-[20px] md:text-[34px] font-[500] mb-[14px] md:mb-[24px]">
               View Users
             </p>
 

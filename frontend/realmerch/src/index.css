@@ -111,3 +111,17 @@ li img{
   right: 3%; */
   z-index: 30;
 }
+
+
+
+@media (max-width: 376px){
+  .boxx{
+    width: 160px;
+  }
+}
+
+@media (max-width: 350px){
+  .boxx{
+    width: 130px;
+  }
+}
