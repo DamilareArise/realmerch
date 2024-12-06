@@ -208,7 +208,7 @@ const AdminDashboard = () => {
               <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
                 <i className="fa-solid fa-user text-white "></i>
                 <span className="flex flex-col gap-[8px]">
-                  <p className="font-[500] text-[14px] lg:text-[18px]">New Customers</p>
+                  <p className="font-[500] text-[14px] textt lg:text-[18px]">New Customers</p>
                   <p className="text-[16px]">523,456</p>
                 </span>
               </div>
@@ -216,7 +216,7 @@ const AdminDashboard = () => {
               <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
                 <i className="fa-solid fa-user text-white "></i>
                 <span className="flex flex-col gap-[8px]">
-                  <p className="font-[500] text-[14px] lg:text-[18px]">
+                  <p className="font-[500] text-[14px] textt lg:text-[18px]">
                     Total Registered Customers
                   </p>
                   <p className="text-[16px]">523,456</p>
@@ -226,7 +226,7 @@ const AdminDashboard = () => {
               <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
                 <img src={activity} alt="" />
                 <span className="flex flex-col gap-[8px]">
-                  <p className="font-[500] text-[14px] lg:text-[18px]">Customer Value</p>
+                  <p className="font-[500] text-[14px] textt lg:text-[18px]">Customer Value</p>
                   <p className="text-[16px]">90%</p>
                 </span>
               </div>
