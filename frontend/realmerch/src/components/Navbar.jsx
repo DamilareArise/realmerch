@@ -129,7 +129,7 @@ const Navbar = () => {
                   <Link to="/inbox">Inbox</Link>
                 </li> */}
                 <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link to="/saved" className="text-[10px] md:text-[14px]">Account</Link>
+                  <Link to="/myAccount" className="text-[10px] md:text-[14px]">Account</Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100">
                   <Link to="/voucher" className="text-[10px] md:text-[14px]">Orders</Link>
