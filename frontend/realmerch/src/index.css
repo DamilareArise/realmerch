@@ -132,6 +132,16 @@ li img{
   }
 }
 
+@media (max-width: 361px){
+  .boxx{
+    width: 150px;
+  }
+
+  .textt{
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 350px){
   .boxx{
     width: 130px;
