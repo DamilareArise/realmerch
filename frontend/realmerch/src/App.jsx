@@ -1,3 +1,4 @@
+
 import Login from "./auth/Login";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import SignUp from "./auth/SignUp";
@@ -21,6 +22,7 @@ import AdminUserSearch from "./components/AdminDash/AdminUserSearch";
 import PaymentInvoice from "./components/Invoice";
 import AdminProfile from "./components/AdminDash/AdminProfile";
 import AdminContact from "./components/AdminDash/AdminContact";
+import MyAccount from "./components/MyAccount";
 
 function App() {
   const firebaseConfig = {
@@ -127,6 +129,7 @@ function App() {
           {/* <Route path="/invoice" element={<PaymentInvoice />} /> */}
           <Route path="/admin/profile" element={<AdminProfile />} />
           <Route path="/admin/contact" element={<AdminContact />} />
+          <Route path="/myAccount" element={<MyAccount />} />
         </Routes>
       </CartProvider>
     </>

@@ -7,13 +7,83 @@ import adProfile from "./../../assets/adminProfile.svg";
 import activity from "./../../assets/activity.svg";
 import back from "./.././../assets/back.svg";
 import forward from "./../../assets/forward.svg";
+import payment from "./../../assets/payment.png";
 import TopSellingSection from "./TopSellingSection";
+import SalesChart from "../SalesChart";
 
 const AdminDashboard = () => {
   const [signuser, setUser] = useState(null);
 
-  let activities = null;
-  let users = null;
+  const activities = [
+    {
+      id: 1,
+      detail: "Accessed Dashboard",
+      action: "Access",
+      page: "Order List",
+      date: "02-07-2024",
+    },
+    {
+      id: 2,
+      detail: "Updated Profile Information",
+      action: "Edit",
+      page: "Profile",
+      date: "05-07-2024",
+    },
+    {
+      id: 3,
+      detail: "Viewed Payment History",
+      action: "View",
+      page: "Payments",
+      date: "10-07-2024",
+    },
+    // {
+    //   id: 4,
+    //   detail: "Downloaded Invoice",
+    //   action: "Download",
+    //   page: "Invoices",
+    //   date: "12-07-2024",
+    // },
+    // {
+    //   id: 5,
+    //   detail: "Logged Out",
+    //   action: "Logout",
+    //   page: "Dashboard",
+    //   date: "15-07-2024",
+    // },
+  ];
+  const userActivities = [
+    {
+      id: 1,
+      name: "John Doe",
+      activity: "Logged in",
+      time: "09:00 AM",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      activity: "Viewed Dashboard",
+      time: "09:15 AM",
+    },
+    {
+      id: 3,
+      name: "Michael Johnson",
+      activity: "Updated Profile",
+      time: "10:00 AM",
+    },
+    {
+      id: 4,
+      name: "Emily Davis",
+      activity: "Logged out",
+      time: "10:30 AM",
+    },
+    // {
+    //   id: 5,
+    //   name: "Chris Brown",
+    //   activity: "Accessed Reports",
+    //   time: "11:00 AM",
+    // },
+  ];
+  
   const auth = getAuth();
   // const navigate = useNavigate()
 
@@ -31,307 +101,348 @@ const AdminDashboard = () => {
     <div>
       <SideNav />
 
-      <div className="pt-[41px] /px-[20px] /md:px-[50px] bg-[#F9F2F2] flex">
+      <div className="pt-[41px] /px-[20px] /md:px-[50px] bg-[#FFFFFF] md:bg-[#F9F2F2] flex">
         {/* <Navbar/> */}
 
-        <div className="w-[10%]"></div>
+        <div className="hidden md:block md:w-[13%] lg:w-[10%]"></div>
 
-        <div className="flex flex-col gap-[38px] /ml-[150px] w-[90%] px-[20px]">
+        <div className="flex flex-col gap-[20px] md:gap-[38px] /ml-[150px] md:w-[87%] lg:w-[90%] px-[20px]">
+          <p className="self-start font-[500] text-[20px] md:text-[30px] text-black leading-[30px] mb-[20px] mt-[30px]">
+            Dashboard
+          </p>
           <div className="flex justify-end mb-[22px]">
             <a
               to={"/admindisplay"}
               className="px-[23px] py-[8px] bg-[#845649] rounded-[25px] flex gap-[10px] items-center shadow-md shadow-[#00000040] text-[#ffffff]"
             >
-              <img src={upload} alt="" />
-              <p className="font-[400] text-[18px] leading-[22.2px]">
+              <img src={upload} alt="" width={18} height={18} />
+              <p className="font-[400] text-[16px] leading-[20px]">
                 Upload Carousel
               </p>
             </a>
           </div>
-          <p className="self-start font-[500] text-[28px] leading-[34px] ">Dashboard</p>
-          <div className="py-[24px] px-[16px] inline-flex gap-[15px] bg-[#845649] rounded-[17px] w-fit text-white">
-            <img src={adProfile} alt="" />
-            <span className="flex flex-col gap-[10px]">
-              <p className="font-[600] text-[20px] leading-[24.2px]">
-                Name :
-                <span className="ml-[17px] font-[400] uppercase">
-                  {signuser ? signuser.displayName : "Omotara Jubril"}
+
+          <div className="flex justify-between gap-[8px] text-white flex-wrap md:flex-nowrap">
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
+              <div className="flex justify-between items-center">
+                <span className="flex flex-col">
+                  <p className="text-[12px] lg:text-[14px]">Total user</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">523,456</p>
                 </span>
-              </p>
-              <p className="font-[600] text-[20px] leading-[24.2px]">
-                Status :<span className="ml-[17px]">ADMIN</span>
-              </p>
-            </span>
+
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                  <i className="fa-solid fa-user text-white "></i>
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <i className="fa-solid fa-arrow-trend-up"></i>
+                <p className="text-[12px] lg:text-[16px] ">5.5% Up from last month</p>
+              </div>
+            </div>
+
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
+              <div className="flex justify-between items-center">
+                <span className="flex flex-col">
+                  <p className="text-[12px] lg:text-[14px]">Total Order</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">11,000</p>
+                </span>
+
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                  <i className="fa-solid fa-gift text-white"></i>
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <i className="fa-solid fa-arrow-trend-up"></i>
+                <p className="text-[12px] lg:text-[16px] ">2.5% Up from last week</p>
+              </div>
+            </div>
+
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
+              <div className="flex justify-between items-center">
+                <span className="flex flex-col">
+                  <p className="text-[12px] lg:text-[14px]">Total Sales</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">10,000</p>
+                </span>
+
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                  <i className="fa-solid fa-user text-white "></i>
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <i className="fa-solid fa-arrow-trend-up"></i>
+                <p className="text-[12px] lg:text-[16px] ">8.5% Up from last week</p>
+              </div>
+            </div>
+
+            <div className="bg-[#845649] p-[12px] lg:p-[24px] rounded-[16px] boxx w-[180px] md:w-[210px] xl:w-[274px]  flex flex-col gap-[8px]">
+              <div className="flex justify-between items-center">
+                <span className="flex flex-col">
+                  <p className="text-[12px] lg:text-[14px]">Total Pending</p>
+                  <p className="text-[16px] lg:text-[24px] font-[600]">10,000</p>
+                </span>
+
+                <span className="py-[10px] px-[12px] lg:px-[14px] bg-[#E3E1E1] rounded-[8px] ">
+                  <i className="fa-solid fa-user text-white "></i>
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <i className="fa-solid fa-arrow-trend-up"></i>
+                <p className="text-[12px] lg:text-[16px] ">4.5% Up from last week</p>
+              </div>
+            </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <p className="mb-[9px] text-[24px] leading-[29px] font-[500]">
+          <SalesChart />
+
+          {/* customer data */}
+          <div className="flex flex-col mt-[24px] mb-[50px]">
+            <p className="text-[#000] font-[500] text-[20px] md:text-[30px] mb-[12px] ">
+              Customer Data
+            </p>
+
+            <div className="flex justify-between gap-[8px] flex-wrap md:flex-nowrap">
+              <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
+                <i className="fa-solid fa-user text-white "></i>
+                <span className="flex flex-col gap-[8px]">
+                  <p className="font-[500] text-[14px] textt lg:text-[18px]">New Customers</p>
+                  <p className="text-[16px]">523,456</p>
+                </span>
+              </div>
+
+              <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
+                <i className="fa-solid fa-user text-white "></i>
+                <span className="flex flex-col gap-[8px]">
+                  <p className="font-[500] text-[14px] textt lg:text-[18px]">
+                    Total Registered Customers
+                  </p>
+                  <p className="text-[16px]">523,456</p>
+                </span>
+              </div>
+
+              <div className="flex gap-[10px] md:gap-[18px] text-white items-center rounded-[16px] py-[12px] md:py-[18px] px-[12px] md:px-[24px] bg-[#845649]">
+                <img src={activity} alt="" />
+                <span className="flex flex-col gap-[8px]">
+                  <p className="font-[500] text-[14px] textt lg:text-[18px]">Customer Value</p>
+                  <p className="text-[16px]">90%</p>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* payment overview */}
+
+          <div>
+            <p className="text-[20px] md:text-[34px] font-[500] mb-[14px] md:mb-[24px]">Payment Overview</p>
+
+            <div className="flex /flex-col lg:flex-row gap-[16px] xl:gap-[50px] flex-wrap md:flex-nowrap">
+              <div>
+                <p className="font-[500] text-[14px] md:text-[20px] text-black leading-[30px] md:mb-[20px]">
+                  Recent Payments
+                </p>
+                <div className="w-[280px] md:w-[340px] lg:w-[450px] xl:w-[584px]">
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                    <div className="flex">
+                      <img src={payment} alt="" />
+                      <span className="flex flex-col">
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
+                      </span>
+                    </div>
+
+                    <span className="flex items-center gap-[8px]">
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
+                      <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
+                    </span>
+                  </div>
+
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                    <div className="flex">
+                      <img src={payment} alt="" />
+                      <span className="flex flex-col">
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
+                      </span>
+                    </div>
+
+                    <span className="flex items-center gap-[8px]">
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
+                      <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
+                    </span>
+                  </div>
+
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                    <div className="flex">
+                      <img src={payment} alt="" />
+                      <span className="flex flex-col">
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
+                      </span>
+                    </div>
+
+                    <span className="flex items-center gap-[8px]">
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
+                      <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
+                    </span>
+                  </div>
+
+                  <div className="flex /w-[584px]  justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] border-black py-[10px] px-[8px]">
+                    <div className="flex">
+                      <img src={payment} alt="" />
+                      <span className="flex flex-col">
+                        <p className="text-[12px] md:text-[16px]">Payment ID: 1234</p>
+                        <p className="text-[12px] md:text-[16px]">Amount: $20</p>
+                      </span>
+                    </div>
+
+                    <span className="flex items-center gap-[8px]">
+                      <p className="font-[500] text-[12px] md:text-[16px]">Successful</p>
+                      <i className="fa-regular fa-thumbs-up text-[#845649] fa-xl fa-shake"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p className="font-[500] text-[14px] md:text-[20px] text-black leading-[30px] /mb-[12px] md:mb-[20px]">
+                  Refunds/ Returns
+                </p>
+
+                <div className="flex gap-[20px]">
+                  <div className="border-[1.41px] border-[#0000001A] rounded-[8px] p-[18px] shadow-md shadow-[#00000040]">
+                    <p className="text-[#00000080] text-[12px] lg:text-[16px] leading-[26px]">
+                      Total Items Returned
+                    </p>
+                    <p className="text-black font-[500] text-[26px] leading-[34px]">
+                      200
+                    </p>
+                    <p className="text-[#00000080] text-[16px] leading-[26px]">
+                      1%
+                    </p>
+                  </div>
+
+                  <div className="border-[1.41px] border-[#0000001A] rounded-[8px] p-[18px] shadow-md shadow-[#00000040]">
+                    <p className="text-[#00000080] text-[12px] lg:text-[16px] leading-[26px]">
+                      Avg. Monthly Refunds
+                    </p>
+                    <p className="text-black font-[500] text-[26px] leading-[34px]">
+                      $850
+                    </p>
+                    <p className="text-[#00000080] text-[16px] leading-[26px]">
+                      +3%
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[20px] md:text-[34px] font-[500] mb-[14px] md:mb-[24px]">
               Recent Activities
             </p>
 
-            <table className="/bg-[#F8F4F8] min-w-[600px] w-full">
-              <thead className=" target ">
-                <tr className="/pt-[45px] /py-[20px] bg-[#ffffff] border-b-[1px] border-black">
-                  <th className="/pt-[45px] py-[20px] w-[10%] mb-[20px]">
+            <table className="w-full text-left mb-4 border-collapse">
+              <thead>
+                <tr className="/bg-gray-200">
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b  text-[10px] md:text-[16px] font-[500]">
+                    S/N
+                  </th>
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
                     Details
                   </th>
-                  <th className="/pt-[45px] py-[20px] w-[30%]">Actions</th>
-                  <th className="/pt-[45px] py-[20px] w-[20%]">Page</th>
-                  <th className="/pt-[45px] py-[20px] w-[10%] xl:w-[20%]">
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                    Actions
+                  </th>
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                    Page
+                  </th>
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
                     Date
                   </th>
                 </tr>
               </thead>
-
               <tbody>
-                {activities === null ? (
-                  <tr className="bg-[#FFFFFF] mb-[15px] shadow-md shadow-[#00000040] border-spacing-x-[18px] border-b-[1px] border-black">
-                    <td className="text-center pt-[26px] pb-[18px]">
-                      Logged in
+                {activities.map((activity, index) => (
+                  <tr
+                    key={activity.id}
+                    className={`${index % 2 === 0 ? "bg-gray-100" : ""}`}
+                  >
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {index + 1}
                     </td>
-                    <td className="text-center pt-[26px] pb-[18px]  /truncate">
-                      Log In
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {activity.detail}
                     </td>
-                    <td className="text-center pt-[26px] pb-[18px] /truncate">
-                      Log In
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {activity.action}
                     </td>
-                    <td className="text-center pt-[26px] pb-[18px]">
-                      23-05-2024
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {activity.page}
                     </td>
-                    {/* <td className="text-center pt-[26px] pb-[18px]">July, 24</td> */}
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {activity.date}
+                    </td>
                   </tr>
-                ) : (
-                  activities.map((activity, index) => (
-                    <tr
-                      key={index}
-                      className="bg-[#FFFFFF] mb-[15px] shadow-md shadow-[#00000040] border-b-[1px] border-black"
-                    >
-                      <td className="pt-[26px] pb-[18px]">
-                        {activity.details}
-                      </td>
-                      <td className="pt-[26px] pb-[18px]">
-                        {activity.actions}
-                      </td>
-                      <td className="pt-[26px] pb-[18px]">{activity.page}</td>
-                      <td className="pt-[26px] pb-[18px]">{activity.date}</td>
-                      {/* <td className="pt-[26px] pb-[18px]">
-                      {activity.lastModified}
-                    </td> */}
-                    </tr>
-                  ))
-                )}
+                ))}
               </tbody>
             </table>
           </div>
 
-          <div className="overflow-x-auto ">
-            <p className="mb-[21px] text-[24px] leading-[29px] font-[500]">
-              Sign Up/Login Activities
-            </p>
-            <div className="flex justify-between flex-col md:flex-row gap-[10px] md:w-full w-fit text-white">
-              <div className="py-[24px] px-[24px] inline-flex gap-[15px] bg-[#845649] rounded-[17px]">
-                <img src={adProfile} alt="" />
-                <span className="flex flex-col gap-[10px]">
-                  <p className="font-[600] text-[16px] lg:text-[20px] leading-[24.2px]">
-                    New Customers
-                  </p>
-                  <p className="font-[400] text-[16px] lg:text-[20px] leading-[24.2px]">
-                    30
-                  </p>
-                </span>
-              </div>
 
-              <div className="py-[24px] px-[24px] inline-flex gap-[15px] bg-[#845649] rounded-[17px]">
-                <img src={adProfile} alt="" />
-                <span className="flex flex-col gap-[10px]">
-                  <p className="font-[600] text-[16px] lg:text-[20px] leading-[24.2px]">
-                    Total Registered Customers
-                  </p>
-                  <p className="font-[400] text-[16px] lg:text-[20px] leading-[24.2px]">
-                    100
-                  </p>
-                </span>
-              </div>
 
-              <div className="py-[24px] px-[24px] inline-flex gap-[15px] bg-[#845649] rounded-[17px]">
-                <img src={activity} alt="" />
-                <span className="flex flex-col gap-[10px]">
-                  <p className="font-[600] text-[16px] lg:text-[20px] leading-[24.2px]">
-                  Customer Value
-                  </p>
-                  <p className="font-[400] text-[16px] lg:text-[20px] leading-[24.2px]">
-                    90%
-                  </p>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col mb-[74px] overflow-x-auto">
-            <p className="mb-[25px] text-[24px] leading-[29px] font-[500]">
+          <div>
+            <p className="text-[20px] md:text-[34px] font-[500] mb-[14px] md:mb-[24px]">
               View Users
             </p>
-            <table className="/bg-[#F8F4F8] min-w-[600px]">
-              <thead className="bg-[#845649] text-[#FFFFFF] target">
-                <tr className="/pt-[45px] pb-[20px] border-b-[1px] border-black">
-                  <th className="/pt-[45px] py-[20px] w-[5%]">S/N</th>
-                  <th className="/pt-[45px] py-[20px] w-[30%]">
-                    User&apos;s name
+
+            <table className="w-full text-left mb-4 border-collapse">
+              <thead>
+                <tr className="bg-[#845649] text-white">
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                    S/N
                   </th>
-                  <th className="/pt-[45px] py-[20px] w-[35%]">Activity</th>
-                  <th className="/pt-[45px] py-[20px] w-[30%] xl:w-[30%]">
-                    Time
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                  User’s Name
                   </th>
-                  {/* <th className="/pt-[45px] pb-[20px] w-[15%]">Last modi...</th> */}
-                  {/* <th className="pt-[45px] pb-[20px] w-[20%] xl:w-[15%]"></th> */}
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                  Activity
+                  </th>
+                  <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                  Time
+                  </th>
+                  {/* <th className="px-[4px] md:px-3 border-t py-5 border-b text-[10px] md:text-[16px] font-[500]">
+                    Date
+                  </th> */}
                 </tr>
               </thead>
-
               <tbody>
-                {users === null ? (
-                  <tr className="bg-[#FFFFFF] mb-[15px] shadow-md shadow-[#00000040] border-spacing-x-[18px] border-b-[1px] border-black ">
-                    <td className="text-center pt-[26px] pb-[18px]">1</td>
-                    <td className="text-center pt-[26px] pb-[18px]  /truncate">
-                      BabaTunde Akinde
+                {userActivities.map((userActivity, index) => (
+                  <tr
+                    key={userActivity.id}
+                    // className={`${index % 2 === 0 ? "bg-gray-100" : ""}`}
+                    className="bg-[#FFFFFF]"
+                  >
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {index + 1}
                     </td>
-                    <td className="text-center pt-[26px] pb-[18px] /truncate">
-                      Upload Thesis
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {userActivity.name}
                     </td>
-                    <td className="text-center pt-[26px] pb-[18px]">
-                      2024-04-03 12:30:06
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {userActivity.activity}
                     </td>
-                    {/* <td className="text-center pt-[26px] pb-[18px]">July, 24</td> */}
+                    <td className="px-[4px] md:px-3 py-5 border-b border-black text-[10px] md:text-[14px] font-[400]">
+                      {userActivity.time}
+                    </td>
+                    
                   </tr>
-                ) : (
-                  users.map((users, index) => (
-                    <tr
-                      key={index}
-                      className="bg-[#F4F4F4] mb-[15px] shadow-md shadow-[#00000040] border-b-[1px] border-black"
-                    >
-                      <td className="pt-[26px] pb-[18px]">{index + 1}</td>
-                      <td className="pt-[26px] pb-[18px]">{users.name}</td>
-                      <td className="pt-[26px] pb-[18px]">{users.activity}</td>
-                      <td className="pt-[26px] pb-[18px]">{users.time}</td>
-                      {/* <td className="pt-[26px] pb-[18px]">
-                      {users.lastModified}
-                    </td> */}
-                    </tr>
-                  ))
-                )}
+                ))}
               </tbody>
             </table>
-
-            <div className="flex items-center gap-[10px] mt-[48px] self-end">
-              <a to={"/"}>
-                <img src={back} alt="" />
-              </a>
-              <span className="font-[500] py-[6] px-[16px] text-[20px] text-white bg-[#845649] rounded-[9px]">
-                {1}
-              </span>
-              <a to={"/"}>
-                <img src={forward} alt="" />
-              </a>
-            </div>
-          </div>
-
-          <div className="flex justify-between">
-            <div>
-              <p>Sales Overview</p>
-
-              <div>
-                <div className="w-[600px]">
-                  <p>Recent Payments</p>
-                  <div className="flex justify-between items-center shadow-2xl shadow-[#00000040] border-b-[1.4px] py-[14px]">
-                    <div className="flex">
-                      <img src="" alt="" />
-                      <span className="flex flex-col">
-                        <p>Payment ID: 1234</p>
-                        <p>Amount: $20</p>
-                      </span>
-                    </div>
-
-                    <p>Successful</p>
-                  </div>
-
-                  <div className="flex justify-between items-center shadow-2xl shadow-[#00000040] border-b-[1.4px] py-[14px]">
-                    <div className="flex">
-                      <img src="" alt="" />
-                      <span className="flex flex-col">
-                        <p>Payment ID: 1234</p>
-                        <p>Amount: $20</p>
-                      </span>
-                    </div>
-
-                    <p>Successful</p>
-                  </div>
-
-                  <div className="flex justify-between items-center shadow-sm shadow-[#00000040] border-b-[1.4px] py-[14px]">
-                    <div className="flex">
-                      <img src="" alt="" />
-                      <span className="flex flex-col">
-                        <p>Payment ID: 1234</p>
-                        <p>Amount: $20</p>
-                      </span>
-                    </div>
-
-                    <p>Successful</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col">
-                  <p>Refunds/ Returns</p>
-                  <div className="flex gap-[12px] ">
-                    <div className="p-[18px] border-[1.5px] border-[#0000001A] rounded-[8px]">
-                      <p>Total Items Returned</p>
-                      <p>200</p>
-                      <p>1%</p>
-                    </div>
-
-                    <div className="p-[18px] border-[1.5px] border-[#0000001A] rounded-[8px]">
-                      <p>Avg. Monthly Refunds</p>
-                      <p>200</p>
-                      <p>1%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <p>Payment Stats</p>
-                <div className="flex gap-[12px] ">
-                  <div className="p-[18px] border-[1.5px] border-[#0000001A] rounded-[8px]">
-                    <p>Total Paid</p>
-                    <p>$12,000,000</p>
-                    <p>10%</p>
-                  </div>
-
-                  <div className="p-[18px] border-[1.5px] border-[#0000001A] rounded-[8px]">
-                    <p>Avg. Monthly Spend</p>
-                    <p>$70,000,000</p>
-                    <p>7%</p>
-                  </div>
-                </div>
-
-                <div>
-                  <p>Order Placement</p>
-                  <div className="flex gap-[12px] ">
-                    <div className="p-[18px] border-[1.5px] border-[#0000001A] rounded-[8px]">
-                      <p>Total Order</p>
-                      <p>$12,000,000</p>
-                      <p>10%</p>
-                    </div>
-
-                    <div className="p-[18px] border-[1.5px] border-[#0000001A] rounded-[8px]">
-                      <p>Avg. Monthly Order </p>
-                      <p>$70,000,000</p>
-                      <p>7%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
 
