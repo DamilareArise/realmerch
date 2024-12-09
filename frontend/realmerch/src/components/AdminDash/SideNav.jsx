@@ -69,7 +69,7 @@ const SideNav = () => {
         />
 
         <div className="flex flex-col gap-[14px] items-start">
-        <Link to={"/admin/productDashboard"} className="flex items-center">
+        <Link to={"/admin/dashboard"} className="flex items-center">
             <img
               src={task}
               alt="Task"
