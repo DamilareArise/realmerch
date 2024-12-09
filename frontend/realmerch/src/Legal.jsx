@@ -10,7 +10,7 @@ const Legal = () => {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">Terms and Conditions</h2>
         <p className="mb-4">
-          Welcome to [Website Name]. By using our website and services, you agree to comply with the following terms and conditions. Please read them carefully before making any purchase or using our platform.
+          Welcome to Real Merch. By using our website and services, you agree to comply with the following terms and conditions. Please read them carefully before making any purchase or using our platform.
         </p>
 
         <ol className="list-decimal list-inside space-y-4">
