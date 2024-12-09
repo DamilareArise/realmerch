@@ -55,8 +55,8 @@ const AdminOrderList = () => {
   return (
     <div className='flex'>
       <SideNav />
-      <div className='w-[10%]'></div>
-      <div className="w-[90%] p-8">
+      <div className='md:w-[13%] lg:w-[10%]'></div>
+      <div className="md:w-[87%] lg:w-[90%] p-[20px] md:p-8 mt-[30px]">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Order Lists</h1>
           <p>Welcome Jubril</p>
@@ -66,32 +66,32 @@ const AdminOrderList = () => {
         <table className="min-w-full bg-white border-collapse">
           <thead>
             <tr className="bg-[#f4f4f4] text-left">
-              <th className="p-4">ID</th>
-              <th className="p-4">Name</th>
-              <th className="p-4">Address</th>
-              <th className="p-4">Date</th>
-              <th className="p-4">Product</th>
-              <th className="p-4">Status</th>
+              <th className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">ID</th>
+              <th className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">Name</th>
+              <th className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">Address</th>
+              <th className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">Date</th>
+              <th className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">Product</th>
+              <th className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">Status</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order, index) => (
               <tr key={index} className="border-b">
-                <td className="p-4">{order.id}</td>
-                <td className="p-4">{order.name}</td>
-                <td className="p-4">{order.address}</td>
-                <td className="p-4">{order.date}</td>
-                <td className="p-4">{order.product}</td>
-                <td className="p-4 w-[200px]">
+                <td className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">{order.id}</td>
+                <td className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">{order.name}</td>
+                <td className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">{order.address}</td>
+                <td className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">{order.date}</td>
+                <td className="p-[4px] lg:p-4 text-[8px] md:text-[12px]">{order.product}</td>
+                <td className="p-[4px] lg:p-4 text-[8px] md:text-[12px] w-[80px] md:w-[200px]">
                   <div className="flex items-center space-x-2">
                     {order.status && (
                       <>
-                        <img src={statusIcons[order.status]} alt={order.status} className="w-6 h-6" />
+                        <img src={statusIcons[order.status]} alt={order.status} className="w-4 md:w-6 h-4 md:h-6" />
                         <span>{order.status}</span>
                       </>
                     )}
                     <select 
-                      className="border border-gray-300 p-2 rounded-lg"
+                      className="border border-gray-300 p-2 rounded-lg  w-[80px] md:w-[120px]"
                       onChange={(e) => handleStatusChange(order, e.target.value)}
                       defaultValue={order.status || ""}
                     >
