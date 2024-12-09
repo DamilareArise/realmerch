@@ -1,9 +1,10 @@
 import React from 'react';
+import profilepic from './../assets/profilepic.png'
 
 function ContactCard({ name, role, email, phone, image }) {
   return (
-    <div className="bg-white w-[280px] rounded-lg shadow-md p-4 flex flex-col items-center">
-      <img src={image} alt={`${name}`} className="w-32 h-32 rounded-full mb-4 object-cover" />
+    <div className="bg-white /w-[200px]  w-[280px] rounded-lg shadow-md p-4 flex flex-col items-center justify-center">
+      <img src={profilepic} alt={`${name}`} className="w-32 h-32 rounded-full mb-4 object-cover" />
       <h2 className="text-xl font-semibold">{name}</h2>
       <p className="text-gray-500">{role}</p>
       <p className="text-gray-600">{email}</p>

@@ -69,6 +69,16 @@ const SideNav = () => {
         />
 
         <div className="flex flex-col gap-[14px] items-start">
+        <Link to={"/admin/productDashboard"} className="flex items-center">
+            <img
+              src={task}
+              alt="Task"
+              className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
+            />
+            {!isCollapsed && <span className="text-white ml-4">DashBoard</span>}
+          </Link>
+
+
           <Link to={"/admin/productDashboard"}>
             <div className="flex items-center">
               <img
@@ -126,14 +136,7 @@ const SideNav = () => {
             </div>
           </Link>
 
-          <div className="flex items-center">
-            <img
-              src={task}
-              alt="Task"
-              className="w-[60px] h-[60px] p-[14px] rounded-[10px] border-[2px] border-[#FFFFFF]"
-            />
-            {!isCollapsed && <span className="text-white ml-4">Task</span>}
-          </div>
+          
 
           <div className="flex items-center">
             <img
