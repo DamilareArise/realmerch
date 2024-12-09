@@ -8,7 +8,7 @@ const AdminContact = () => {
       name: "Jason Price",
       role: "Lead Admin",
       email: "kuhlman.jeremy@yahoo.com",
-      phone: null,
+      phone: '+234 9031328853',
       image: "link_to_image", // Replace with actual image URL or path
     },
     {
@@ -22,12 +22,12 @@ const AdminContact = () => {
   ];
   return (
     <div>
-      <div className="w-[10%]">
+      <div className="md:w-[13%] lg:w-[10%]">
         <SideNav />
       </div>
       <div className="p-4 bg-[#F5EBE9] min-h-screen flex items-start">
-        <div className="w-[10%]"></div>
-        <div className="/grid /grid-cols-1 /sm:grid-cols-2 /md:grid-cols-3 gap-4 flex w-[90%]">
+        <div className="md:w-[13%] lg:w-[10%]"></div>
+        <div className="/grid /grid-cols-1 /sm:grid-cols-2 /md:grid-cols-3 gap-4 flex flex-wrap justify-center md:justify-start md:w-[87%] lg:w-[90%]">
           {contacts.map((contact, index) => (
             <ContactCard
               key={index}
