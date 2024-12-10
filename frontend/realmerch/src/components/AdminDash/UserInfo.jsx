@@ -18,7 +18,7 @@ const UserInfo = ({ user }) => {
     </div>;
 
     return (
-      <div className="text-gray-700">
+      <div className="text-gray-700 ">
         <div className="flex items-center mb-4 gap-[16px]">
         {user.profile? <img src="" alt=""/>: <img src={profile} alt=""/>}
           <h2 className="text-xl font-semibold">{user.name}</h2>

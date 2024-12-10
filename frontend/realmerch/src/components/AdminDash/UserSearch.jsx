@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import profile from './../../assets/userlistprof.svg'
+import profile from "./../../assets/userlistprof.svg";
 
 const UserSearch = ({ users, onUserSelect }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -9,8 +9,8 @@ const UserSearch = ({ users, onUserSelect }) => {
   );
 
   return (
-    <div className="relative">
-      <div className="border-b-[1px] border-[#000000] pt-[18px] pl-[18px] fixed w-[30%] bg-white top-0">
+    <div className="relative ">
+      <div className="border-b-[1px] border-[#000000] md:pt-[18px] pl-[18px] fixed w-full lg:w-[30%] bg-white top-0 pt-[45px]">
         <input
           type="text"
           placeholder="Search..."
@@ -20,17 +20,23 @@ const UserSearch = ({ users, onUserSelect }) => {
           autoFocus
         />
       </div>
-      <ul className="space-y-2 pt-[60px]">
+      <ul className="/space-y-2 pt-[80px]">
         {filteredUsers.map((user) => (
           <li
             key={user.id}
             onClick={() => onUserSelect(user)}
-            className="px-[18px] py-[22px]  hover:bg-gray-300 cursor-pointer border-b-[1px] border-[#80808080] font-[400] text-[18px]"
+            className="px-[18px] py-[16px] flex justify-between  hover:bg-gray-300 cursor-pointer border-b-[1px] border-[#80808080] font-[400] text-[18px]"
           >
             <div className="flex items-center gap-[15px]">
-                {user.profile? <img src="" alt=""/>: <img src={profile} alt=""/>}
-            {user.name}
+              {user.profile ? (
+                <img src="" alt="" />
+              ) : (
+                <img src={profile} alt="" />
+              )}
+              {user.name}
             </div>
+
+            <div className="flex items-center gap-[15px] lg:hidden">{user.role}</div>
           </li>
         ))}
       </ul>
