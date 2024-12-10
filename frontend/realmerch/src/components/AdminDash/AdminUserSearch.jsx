@@ -95,7 +95,7 @@ const AdminUserSearch = () => {
           </div>
 
           {/* Inline UserInfo for larger screens */}
-          <div className="hidden lg:block w-[50%] ml-8 bg-white p-6 rounded-lg shadow-md">
+          <div className="hidden lg:block w-[50%] h-fit fixed right-[5%] top-[15%] ml-8 bg-white p-6 rounded-lg shadow-md">
             <UserInfo user={selectedUser} />
           </div>
 
