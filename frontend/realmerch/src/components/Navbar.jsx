@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import search from "./../assets/search.svg";
 import profilee from "./../assets/profile.svg";
 import cart from "./../assets/cart.svg";
@@ -32,12 +32,15 @@ const Navbar = () => {
       }
     });
   }, []);
+
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        setemail("");
+        setprofile("");
       })
-      .catch((error) => {
+      .catch(() => {
         // An error happened.
       });
   };
@@ -62,84 +65,58 @@ const Navbar = () => {
         </span>
 
         <div className="flex gap-[13px] items-center" onClick={toggleDropdown}>
-          {/* {profile ? (
-            <img src={profile} alt="" width={50} className="rounded-[100px]" />
-          ) : (
-            <img src={profilee} alt="" />
-          )}
-
           {email ? (
-            <div className="text-[10px] md:text-[14px]">
-              <a href=""> {email} </a>{" "}
-              <a href="" onClick={handleLogout}>
-                {" "}
-               
-                <i className="fa-solid fa-arrow-right-from-bracket ml-[5px]"></i>
-              </a>{" "}
-            </div>
-          ) : (
-            <Link to={"/login"} className="hidden md:block">
-              {" "}
-              Login{" "}
-            </Link>
-          )} */}
-
-          {profile ? (
             <div className="flex gap-[4px] items-center cursor-pointer">
-              <img src={profile} alt="" width={50} className="rounded-[100px]" />
-              <p className="text-sm">Hi, Sabinwa </p>
+              <img
+                src={profile ? profile : profilee}
+                alt=""
+                width={50}
+                className="rounded-[100px]"
+              />
+              <p className="text-sm">{email} </p>
               <i className="fa-solid fa-angle-down text-white"></i>
             </div>
-            
           ) : (
-            
             <div className="flex gap-[4px] items-center cursor-pointer">
               <img src={profilee} alt="" />
               <p className="text-sm">Hi, Guest </p>
               <i className="fa-solid fa-angle-down text-white"></i>
             </div>
-            
           )}
 
           {dropdownOpen && (
             <div className="absolute top-[70%] right-[5%] mt-2 bg-white text-black shadow-md rounded-lg py-2 w-48">
               <ul>
-                <li className="px-4 py-2 hover:bg-gray-100">
+                {email ? (
                   <>
-                    {email ? (
-                      <div className="text-[10px] md:text-[14px]">
-                        <a href=""> {email} </a>{" "}
-                        <i className="fa-solid fa-angle-down"></i>
-                      </div>
-                    ) : (
-                      <Link to={"/login"} className="/hidden /md:block text-[10px] md:text-[14px]">
-                        {" "}
-                        Login{" "}
-                        
-                      </Link>
-                    )}
+                    <Link
+                      to="/myAccount"
+                      className="text-[10px] md:text-[14px]"
+                    >
+                      <li className="px-4 py-2 hover:bg-gray-100">Account</li>
+                    </Link>
+                    <Link to="/voucher" className="text-[10px] md:text-[14px]">
+                      <li className="px-4 py-2 hover:bg-gray-100">Orders</li>
+                    </Link>
+
+                    <li
+                      className="px-4 py-2 text-red-500 hover:bg-gray-100"
+                      onClick={handleLogout}
+                    >
+                      <button className="flex items-center gap-[4px]">
+                        <p className="text-[10px] md:text-[14px]">Logout</p>
+                        <i className="fa-solid fa-arrow-right-from-bracket ml-[5px]"></i>
+                      </button>
+                    </li>
                   </>
-                </li>
-
-                {/* <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link to="/login">Login</Link>
-                </li> */}
-
-                {/* <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link to="/inbox">Inbox</Link>
-                </li> */}
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link to="/myAccount" className="text-[10px] md:text-[14px]">Account</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link to="/voucher" className="text-[10px] md:text-[14px]">Orders</Link>
-                </li>
-                <li className="px-4 py-2 text-red-500 hover:bg-gray-100" onClick={handleLogout}>
-                  <button  className="flex items-center gap-[4px]">
-                    <p className="text-[10px] md:text-[14px]">Logout</p>
-                    <i className="fa-solid fa-arrow-right-from-bracket ml-[5px]"></i>
-                  </button>
-                </li>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    className="/hidden /md:block text-[10px] md:text-[14px]"
+                  >
+                    <li className="px-4 py-2 hover:bg-gray-100">Login</li>
+                  </Link>
+                )}
               </ul>
             </div>
           )}

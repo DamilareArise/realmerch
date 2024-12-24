@@ -49,10 +49,12 @@ const checkAdmin = (req, res) => {
 
 
 const makeAdmin = (req, res) => {
-    const { email } = req.body
-    userRegModel.findOneAndUpdate({ email }, { $set: { is_staff: true } }, { new: true })
+    const { email, is_staff } = req.body
+
+    userRegModel.findOneAndUpdate({ email }, { $set: { is_staff } }, { new: true }) 
     .then((data) => {
-        if (data) {
+
+        if (data && data.is_staff) {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -76,6 +78,9 @@ const makeAdmin = (req, res) => {
               });
             return res.send({ status: true, message:'user is now an admin', data })
         }
+        else{
+            return res.send({ status: false, message: 'user is not an admin', data })
+        }
     })
     .catch((err) => {
         return res.status(500).send({ status: false, message: err.message })
@@ -83,4 +88,14 @@ const makeAdmin = (req, res) => {
 
 }
 
-module.exports = { registerUser, checkAdmin, makeAdmin }
+const getAllUser = (req, res) => {
+    userRegModel.find()
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).send({ message: err.message })
+        })
+}
+
+module.exports = { registerUser, checkAdmin, makeAdmin, getAllUser }

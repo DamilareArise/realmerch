@@ -8,30 +8,37 @@ import message from "./../assets/mail.svg";
 import passwordd from "./../assets/password.svg";
 import loginn from "./../assets/loginbg.png";
 import loginmg from "./../assets/loginmg.jpg";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+import { useFormik } from "formik";
+import * as Yup from "yup"; 
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = ({ info }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setloading] = useState(false);
   const { signWithGoogle, loginWithEmailAndPassword } = info;
   const navigate = useNavigate();
+  
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // login logic go dey here
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
 
-  const loginUser = () => {
-    setloading(true);
-    loginWithEmailAndPassword(email, password);
-    setloading(false);
-    navigate("/");
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    onSubmit: (values) => {
+      setloading(true);
+      console.log(values);
+      loginWithEmailAndPassword(values.email, values.password);
+      setloading(false);
+      navigate("/");
+    },
+
+    validationSchema: Yup.object({
+      email: Yup.string().email("Enter a valid email").required("Email is required"),
+      password: Yup.string().min(8, "Password is too short - should be 8 characters minimum").required("Password is required"),
+      }),
+    });
+
 
   return (
     <div
@@ -84,7 +91,7 @@ const Login = ({ info }) => {
             <p className="text-center mb-[12px] lg:mb-[23px]">OR</p>
 
             <form
-              onSubmit={handleSubmit}
+              onSubmit={formik.handleSubmit}
               className="flex flex-col lg:w-[400px] xl:w-[487px]"
             >
               <div className="flex items-center border-[1px] border-[#808080] gap-[17.43px] rounded-[30px] px-[25.56px] shadow-md shadow-[#00000040] mb-[10px]">
@@ -93,11 +100,17 @@ const Login = ({ info }) => {
                   type="email"
                   placeholder="Email"
                   className="py-[8px] lg:py-[18px]  border-none outline-none w-full placeholder:text-[20px] bg-[#F2E3DD]"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                  onChange={formik.handleChange}
+                  name="email"
+                  onBlur={formik.handleBlur}
                 />
               </div>
+                {formik.touched.email && formik.errors.email ? (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formik.errors.email}
+                  </div>
+                ) : null}
+                  
 
               <div className="flex items-center border-[1px] border-[#808080] gap-[17.43px] rounded-[30px] px-[25.56px] shadow-md shadow-[#00000040] mb-[10px]">
                 <img
@@ -110,11 +123,17 @@ const Login = ({ info }) => {
                   type="password"
                   placeholder="Password"
                   className="py-[8px] lg:py-[18px]  border-none outline-none w-full placeholder:text-[20px] bg-[#F2E3DD]"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
+                  onChange={formik.handleChange}
+                  name="password"
+                  onBlur={formik.handleBlur}
+                  
                 />
               </div>
+                {formik.touched.password && formik.errors.password ? (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formik.errors.password}
+                  </div>
+                ) : null}
 
               <a
                 href="http://"
@@ -126,7 +145,6 @@ const Login = ({ info }) => {
               <button
                 type="submit"
                 className="bg-[#845649] rounded-[20px] py-[8px] lg:py-[14px] text-[16px] font-[500] text-[white]"
-                onClick={loginUser}
               >
                 {loading ? "Loading..." : "Login"}
               </button>

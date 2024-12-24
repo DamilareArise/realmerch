@@ -4,8 +4,9 @@ import profile from "./../../assets/userlistprof.svg";
 const UserSearch = ({ users, onUserSelect }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  
+  const filteredUsers = users.filter((user) => 
+    user.fullname.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -33,7 +34,7 @@ const UserSearch = ({ users, onUserSelect }) => {
               ) : (
                 <img src={profile} alt="" />
               )}
-              {user.name}
+              {user.fullname}
             </div>
 
             <div className="flex items-center gap-[15px] lg:hidden">{user.role}</div>
