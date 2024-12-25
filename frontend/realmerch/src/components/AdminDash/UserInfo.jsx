@@ -32,7 +32,7 @@ const UserInfo = ({ user }) => {
   }
 
   const handleSave = () => {
-    axios.put("http://localhost:5000/account/make-admin", {
+    axios.put("https://realmerch.onrender.com/account/make-admin", {
       email: user.email,
       is_staff: isChecked
     })

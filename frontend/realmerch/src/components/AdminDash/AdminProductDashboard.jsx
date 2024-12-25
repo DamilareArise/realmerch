@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mock from "./../../assets/mock.svg";
 import {
@@ -10,6 +10,7 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import SideNav from "./SideNav";
+import axios from "axios";
 
 const AdminProductDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,6 +22,7 @@ const AdminProductDashboard = () => {
   const [productCategory, setProductCategory] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productImage, setProductImage] = useState("");
+  const [allProduct, setAllProduct] = useState([])
   const [products, setProducts] = useState([
     {
       image: "image1.jpg",
@@ -58,6 +60,15 @@ const AdminProductDashboard = () => {
       qty: 52,
     },
   ]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/product/all-products")
+    .then((response)=>{
+      console.log(response.data);
+      setAllProduct(response.data.data)
+    })
+  }, []);
+
 
   const handleQuantityClick = (product) => {
     setSelectedProduct({ ...product });
@@ -114,9 +125,11 @@ const AdminProductDashboard = () => {
     }
   };
 
-  const filteredProducts = products.filter((product) =>
+  const filteredProducts = allProduct.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  
+  
 
   return (
     <div className="flex bg-[#F9F2F2]">
@@ -140,10 +153,6 @@ const AdminProductDashboard = () => {
                 <br className="" />
               
             </div>
-
-            
-         
-
 
           <input
               type="text"
@@ -182,8 +191,8 @@ const AdminProductDashboard = () => {
               <tr key={index} className="border-b">
                 <td className="p-4">
                   <img
-                    // src={product.image}
-                    src={mock}
+                    src={product.image}
+                    // src={mock}
                     alt={product.name}
                     className="w-[50px] md:w-[64px] h-[50px] md:h-[64px] object-contain rounded-md"
                   />
@@ -198,7 +207,7 @@ const AdminProductDashboard = () => {
                   {product.price}
                 </td>
                 <td className="p-[4px] md:p-4 text-[8px] md:text-[10px] lg:text-[16px]">
-                  {product.qty}
+                  {product.quantity}
                 </td>
                 <td className="p-[4px] md:p-4 text-[8px] md:text-[10px] lg:text-[16px]">
                   <div className="flex space-x-2">

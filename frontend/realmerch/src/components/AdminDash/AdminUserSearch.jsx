@@ -9,7 +9,7 @@ const AdminUserSearch = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/account/all-users")
+    axios.get("https://realmerch.onrender.com/account/all-users")
     .then((response)=>{
       console.log(response.data);
       setUsers(response.data)

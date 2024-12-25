@@ -43,7 +43,7 @@ function App() {
   // Validate User Or Register
   const validateOrRegisterUser = (fullname, email) => {
     axios
-      .post("http://localhost:5000/account/register", {
+      .post("https://realmerch.onrender.com/account/register", {
         fullname: fullname,
         email: email,
       })

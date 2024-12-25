@@ -47,7 +47,7 @@ const AdminLogin = ( {signin} ) => {
 
   const loginAdmin = () =>{
     setloading(true)
-    axios.post("http://localhost:5000/account/check-admin", {
+    axios.post("https://realmerch.onrender.com/account/check-admin", {
       email
     })
     .then((response)=>{
