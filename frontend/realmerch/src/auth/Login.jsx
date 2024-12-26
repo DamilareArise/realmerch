@@ -28,9 +28,11 @@ const Login = ({ info }) => {
     onSubmit: (values) => {
       setloading(true);
       console.log(values);
-      loginWithEmailAndPassword(values.email, values.password);
+      let accept = loginWithEmailAndPassword(values.email, values.password);
       setloading(false);
-      navigate("/");
+      if (accept) {
+        navigate("/");
+      }
     },
 
     validationSchema: Yup.object({

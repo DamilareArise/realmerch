@@ -17,6 +17,7 @@ import * as Yup from "yup";
 const SignUp = ({ info }) => {
   const [loading, setloading] = useState(false);
   const { signWithGoogle, validateOrRegisterUser } = info;
+  
   const auth = getAuth();
 
   const formik = useFormik({
@@ -29,20 +30,21 @@ const SignUp = ({ info }) => {
 
     onSubmit: (values) => {
       setloading(true);
-      console.log(values);
       createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        console.log(user);
         validateOrRegisterUser(values.fullName, values.email);
         setloading(false);
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        alert("User already exists");
         setloading(false);
+
       });
         
     },
