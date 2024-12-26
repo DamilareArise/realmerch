@@ -52,8 +52,16 @@ const AdminLogin = ( {signin} ) => {
     })
     .then((response)=>{
       if(response.data.status){
-        signin(email, password)
-        navigate('/admin/dashboard')
+        let accept = signin(email, password)
+        if(accept){
+          setloading(false)
+          navigate('/admin/dashboard')
+          
+        }
+        else{
+          alert('Wrong username or password')
+          setloading(false)
+        }
 
       }
       else{

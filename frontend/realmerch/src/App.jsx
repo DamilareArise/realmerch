@@ -79,6 +79,7 @@ function App() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        return user;
         
       })
       .catch((error) => {
@@ -86,6 +87,7 @@ function App() {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         alert("Wrong Email or Password");
+        return null;
       });
   };
 
