@@ -5,6 +5,10 @@ import message from "././../../assets/mail.svg";
 import passwordd from "././../../assets/password.svg"; // Replace this with a lock icon image
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+
+
+
 
 
 const AdminLogin = ( {signin} ) => {
@@ -12,7 +16,7 @@ const AdminLogin = ( {signin} ) => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setloading] = useState(false)
-
+  const auth = getAuth();
   const navigate = useNavigate()
 
   const validateForm = () => {
@@ -40,39 +44,50 @@ const AdminLogin = ( {signin} ) => {
     e.preventDefault();
     if (validateForm()) {
       // Perform the login action
-      console.log("Form submitted successfully:", { email, password });
+      console.log("Form submitted successfully");
       // You can redirect or trigger further logic here
     }
   };
 
-  const loginAdmin = () =>{
-    setloading(true)
-    axios.post("https://realmerch.onrender.com/account/check-admin", {
-      email
-    })
-    .then((response)=>{
-      if(response.data.status){
-        let accept = signin(email, password)
-        if(accept){
-          setloading(false)
-          navigate('/admin/dashboard')
-          
+  const loginAdmin = async () => {
+    try {
+      setloading(true);
+  
+      // Check if user is admin
+      const response = await axios.post("https://realmerch.onrender.com/account/check-admin", {
+        email,
+      });
+  
+      if (response.data.status) {
+        // If admin, attempt to sign in
+        const accept = await signin(email, password);
+        console.log(accept);
+        if (accept) {
+          console.log("Admin logged in");
+          navigate("/admin/dashboard");
+        } else {
+          alert("Invalid login credentials");
         }
-        else{
-          alert('Wrong username or password')
-          setloading(false)
-        }
+      } else {
+        alert("Not admin");
+      }
+    } catch (err) {
+      console.error("Error during admin login:", err);
+      alert("An error occurred while logging in.");
+    } finally {
+      setloading(false); // Ensure loading state is updated
+    }
+  };
+  
 
-      }
-      else{
-        alert('Not admin')
-        setloading(false)
-      }
-    })
-    .catch((err)=>{
-      console.log(err)
-      setloading(false)
-    })
+  const handleResetPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert(`Password reset email has been sent to ${email}`);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   }
 
   return (
@@ -142,6 +157,7 @@ const AdminLogin = ( {signin} ) => {
             <a
               href="#"
               className="text-[18px] font-[400] text-black hover:underline text-end"
+              onClick={handleResetPassword}
             >
               Forgot Password?
             </a>

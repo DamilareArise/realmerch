@@ -1,4 +1,3 @@
-
 import Login from "./auth/Login";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import SignUp from "./auth/SignUp";
@@ -72,23 +71,24 @@ function App() {
       });
   };
 
-  // signin with email and password
-  const loginWithEmailAndPassword = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        return user;
-        
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        alert("Wrong Email or Password");
-        return null;
-      });
+  // Sign in with email and password
+  const loginWithEmailAndPassword = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log(user);
+      return true; // Login successful
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error("Error during login:", errorCode, errorMessage);
+      alert("Wrong Email or Password");
+      return false; // Login failed
+    }
   };
 
   // send email verification

@@ -25,14 +25,17 @@ const Login = ({ info }) => {
       password: "",
     },
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setloading(true);
-      console.log(values);
-      let accept = loginWithEmailAndPassword(values.email, values.password);
-      setloading(false);
+
+      let accept = await loginWithEmailAndPassword(values.email, values.password);
       if (accept) {
         navigate("/");
+      }else{
+        alert("Invalid credentials");
       }
+
+      setloading(false);
     },
 
     validationSchema: Yup.object({
@@ -147,6 +150,7 @@ const Login = ({ info }) => {
               <button
                 type="submit"
                 className="bg-[#845649] rounded-[20px] py-[8px] lg:py-[14px] text-[16px] font-[500] text-[white]"
+                disabled={loading}
               >
                 {loading ? "Loading..." : "Login"}
               </button>
