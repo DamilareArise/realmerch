@@ -66,7 +66,7 @@ const makeAdmin = (req, res) => {
                 from: process.env.GMAIL_USERNAME,
                 to: [data.email, process.env.GMAIL_USERNAME],
                 subject: 'Welcome Back Admin',
-                html: adminMail.replace('[User\'s Name]', data.fullname).replace('[admin-login]', 'http://localhost:5173/admin/login')
+                html: adminMail.replace('[User\'s Name]', data.fullname).replace('[admin-login]', 'https://realmerch-21s7.vercel.app/admin/login')
               };
         
               transporter.sendMail(mailOptions, function (error, info) {

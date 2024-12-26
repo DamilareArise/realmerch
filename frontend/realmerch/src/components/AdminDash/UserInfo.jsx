@@ -8,10 +8,15 @@ const UserInfo = ({ user }) => {
   const [success, setSuccess] = useState(null);
 
   useEffect(() => {
+    handleChexboxChange();
+
+  }, [user]);
+
+  const handleChexboxChange = () => {
     if (user) {
       setIsChecked(user.is_staff);
     }
-  }, [user]);
+  };
 
   if (!user) {
     return (

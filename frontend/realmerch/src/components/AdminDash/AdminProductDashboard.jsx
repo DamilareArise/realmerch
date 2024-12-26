@@ -23,6 +23,9 @@ const AdminProductDashboard = () => {
   const [productImage, setProductImage] = useState("");
   const [allProduct, setAllProduct] = useState([]);
   const [loading, setloading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingProductId, setEditingProductId] = useState(null);
+
 
   useEffect(() => {
     loadProducts();
@@ -43,22 +46,41 @@ const AdminProductDashboard = () => {
       quantity: "",
       image: "",
     },
+
     onSubmit: (values) => {
       setloading(true);
-      console.log(values);
-      axios.post("http://localhost:5000/product/add-product", values)
-      .then((response)=>{
-        console.log(response.data);
-        setloading(false);
-        setShowAddProductModal(false);
-        loadProducts();
-
-      })
-      .catch((error)=>{
-        console.log(error);
-        setloading(false);
-      })
+    
+      if (isEditing) {
+        // Edit product
+        axios
+          .put(`https://realmerch.onrender.com/product/update-product/${editingProductId}`, values)
+          .then((response) => {
+            console.log(response.data);
+            setloading(false);
+            closeModal();
+            loadProducts();
+          })
+          .catch((error) => {
+            console.error(error);
+            setloading(false);
+          });
+      } else {
+        // Add product
+        axios
+          .post("https://realmerch.onrender.com/product/add-product", values)
+          .then((response) => {
+            console.log(response.data);
+            setloading(false);
+            setShowAddProductModal(false);
+            loadProducts();
+          })
+          .catch((error) => {
+            console.error(error);
+            setloading(false);
+          });
+      }
     },
+    
 
     validationSchema: Yup.object({
       name: Yup.string().required("Product Name is required"),
@@ -75,8 +97,6 @@ const AdminProductDashboard = () => {
     setShowQuantityModal(true);
 
   };
-
-
     
   const handleQuantityChange = (operation) => {
     setSelectedProduct((prevProduct) => ({
@@ -90,7 +110,7 @@ const AdminProductDashboard = () => {
 
   const saveQuantity = () => {
     const updatedProduct = { ...selectedProduct, quantity: selectedProduct.quantity };
-    axios.put(`http://localhost:5000/product/update-product/${selectedProduct._id}`, updatedProduct)
+    axios.put(`https://realmerch.onrender.com/product/update-product/${selectedProduct._id}`, updatedProduct)
     .then((response)=>{
       console.log(response.data);
       loadProducts();
@@ -105,7 +125,7 @@ const AdminProductDashboard = () => {
     let sure = window.confirm("Are you sure you want to delete this product?");
     if (!sure) return;
   
-    axios.delete(`http://localhost:5000/product/delete-product/${id}`)
+    axios.delete(`https://realmerch.onrender.com/product/delete-product/${id}`)
     .then((response)=>{
       console.log(response.data);
       loadProducts();
@@ -114,6 +134,36 @@ const AdminProductDashboard = () => {
       console.log(error);
     });
   };
+
+
+  const handleEditProduct = (index) => {
+    const product = allProduct[index];
+    console.log(product);
+    setIsEditing(true);
+    setEditingProductId(product._id);
+  
+    // Populate form fields
+    formik.setValues({
+      name: product.name,
+      category: product.category,
+      price: product.price,
+      quantity: product.quantity,
+      image: product.image,
+    });
+  
+    setShowAddProductModal(true);
+    
+  };
+
+  const closeModal = () => {
+    setShowAddProductModal(false);
+    setIsEditing(false);
+    setEditingProductId(null);
+    formik.resetForm();
+  };
+  
+
+
 
   const handleLocalImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -213,7 +263,9 @@ const AdminProductDashboard = () => {
                         className="text-[#646465]"
                       />
                     </button>
-                    <button className="p-2 rounded-lg border">
+                    <button className="p-2 rounded-lg border"
+                      onClick={() => handleEditProduct(index)}
+                    >
                       <FontAwesomeIcon
                         icon={faEdit}
                         className="text-green-500"
@@ -240,11 +292,12 @@ const AdminProductDashboard = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-8 rounded-lg w-[300px] text-center">
               <form onSubmit={formik.handleSubmit}>
-                <h2 className="text-xl font-bold mb-4">Add New Product</h2>
+                <h2 className="text-xl font-bold mb-4">{isEditing ? "Edit Product" : "Add New Product"}</h2>
                 <input
                   type="text"
                   placeholder="Product Name"
                   name="name"
+                  value={formik.values.name}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="border p-2 w-full mb-4 rounded"
@@ -256,6 +309,7 @@ const AdminProductDashboard = () => {
                   type="text"
                   placeholder="Category"
                   name="category"
+                  value={formik.values.category}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="border p-2 w-full mb-4 rounded"
@@ -269,6 +323,7 @@ const AdminProductDashboard = () => {
                   type="text"
                   placeholder="Price"
                   name="price"
+                  value={formik.values.price}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="border p-2 w-full mb-4 rounded"
@@ -280,6 +335,7 @@ const AdminProductDashboard = () => {
                   type="text"
                   placeholder="Image URL"
                   name="image"
+                  value={formik.values.image}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="border p-2 w-full mb-4 rounded"
@@ -291,6 +347,7 @@ const AdminProductDashboard = () => {
                   type="text"
                   placeholder="Quantity"
                   name="quantity"
+                  value={formik.values.quantity}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   className="border p-2 w-full mb-4 rounded"
@@ -318,12 +375,12 @@ const AdminProductDashboard = () => {
                   type="submit"
                   className="bg-[#845649] text-white px-4 py-2 rounded-lg"
                 >
-                  {loading ? "Loading..." : "Add Product"}
+                  {loading ? "Loading..." : isEditing ? "Update Product" : "Add Product"}
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => setShowAddProductModal(false)}
+                  onClick={closeModal}
                   className="text-gray-500 mt-2 block underline"
                 >
                   Cancel

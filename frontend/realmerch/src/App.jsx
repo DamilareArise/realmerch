@@ -92,7 +92,7 @@ function App() {
   // send email verification
   const verifyEmail = (email) => {
     const actionCodeSettings = {
-      url: "http://localhost:5173/login", // The URL to which users will be redirected
+      url: "https://realmerch-21s7.vercel.app/login", // The URL to which users will be redirected
       handleCodeInApp: true, // If set to true, the app will handle the link directly
     };
 
