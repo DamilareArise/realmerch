@@ -15,9 +15,10 @@ const addProduct = (req, res) => {
             res.status(500).send({ status: false, message: err.message })
         })
 }
-// get all products
+// get all products and reverse the order by date
+
 const getAllProducts = (req, res) => {
-    productModel.find()
+    productModel.find().sort({ date: -1 })
         .then((data) => {
             res.send({ status: true, data })
         })

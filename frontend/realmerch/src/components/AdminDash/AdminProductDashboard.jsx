@@ -11,6 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SideNav from "./SideNav";
 import axios from "axios";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const AdminProductDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,104 +20,99 @@ const AdminProductDashboard = () => {
   const [showQuantityModal, setShowQuantityModal] = useState(false);
   const [showImageUploadModal, setShowImageUploadModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [productName, setProductName] = useState("");
-  const [productCategory, setProductCategory] = useState("");
-  const [productPrice, setProductPrice] = useState("");
   const [productImage, setProductImage] = useState("");
-  const [allProduct, setAllProduct] = useState([])
-  const [products, setProducts] = useState([
-    {
-      image: "image1.jpg",
-      name: "Apple Watch Series 4",
-      category: "Digital Product",
-      price: "$690.00",
-      qty: 63,
-    },
-    {
-      image: "image2.jpg",
-      name: "Microsoft Headsquare",
-      category: "Digital Product",
-      price: "$190.00",
-      qty: 13,
-    },
-    {
-      image: "image3.jpg",
-      name: "Women's Dress",
-      category: "Fashion",
-      price: "$640.00",
-      qty: 635,
-    },
-    {
-      image: "image4.jpg",
-      name: "Samsung A50",
-      category: "Mobile",
-      price: "$400.00",
-      qty: 67,
-    },
-    {
-      image: "image5.jpg",
-      name: "Camera",
-      category: "Electronic",
-      price: "$420.00",
-      qty: 52,
-    },
-  ]);
+  const [allProduct, setAllProduct] = useState([]);
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/product/all-products")
-    .then((response)=>{
-      console.log(response.data);
-      setAllProduct(response.data.data)
-    })
+    loadProducts();
   }, []);
 
-
-  const handleQuantityClick = (product) => {
-    setSelectedProduct({ ...product });
-    setShowQuantityModal(true);
+  const loadProducts = () => {
+    axios.get("http://localhost:5000/product/all-products").then((response) => {
+      console.log(response.data);
+      setAllProduct(response.data.data);
+    });
   };
 
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      category: "",
+      price: "",
+      quantity: "",
+      image: "",
+    },
+    onSubmit: (values) => {
+      setloading(true);
+      console.log(values);
+      axios.post("http://localhost:5000/product/add-product", values)
+      .then((response)=>{
+        console.log(response.data);
+        setloading(false);
+        setShowAddProductModal(false);
+        loadProducts();
+
+      })
+      .catch((error)=>{
+        console.log(error);
+        setloading(false);
+      })
+    },
+
+    validationSchema: Yup.object({
+      name: Yup.string().required("Product Name is required"),
+      category: Yup.string().required("Category is required"),
+      price: Yup.string().required("Price is required"),
+      quantity: Yup.string().required("Quantity is required"),
+      image: Yup.string().required("Image is required"),
+    }),
+  });
+
+  const handleQuantityClick = (index) => {
+    console.log(allProduct[index]);
+    setSelectedProduct(allProduct[index]);
+    setShowQuantityModal(true);
+
+  };
+
+
+    
   const handleQuantityChange = (operation) => {
     setSelectedProduct((prevProduct) => ({
       ...prevProduct,
-      qty:
+      quantity:
         operation === "increment"
-          ? prevProduct.qty + 1
-          : Math.max(1, prevProduct.qty - 1),
+          ? prevProduct.quantity + 1
+          : Math.max(1, prevProduct.quantity - 1),
     }));
   };
 
   const saveQuantity = () => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.name === selectedProduct.name ? selectedProduct : product
-      )
-    );
+    const updatedProduct = { ...selectedProduct, quantity: selectedProduct.quantity };
+    axios.put(`http://localhost:5000/product/update-product/${selectedProduct._id}`, updatedProduct)
+    .then((response)=>{
+      console.log(response.data);
+      loadProducts();
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
     setShowQuantityModal(false);
   };
 
-  const handleAddProduct = () => {
-    const newProduct = {
-      image: productImage,
-      name: productName,
-      category: productCategory,
-      price: productPrice,
-      qty: 1,
-    };
-    setProducts([...products, newProduct]);
-    setShowAddProductModal(false);
-    resetProductForm();
-  };
-
-  const resetProductForm = () => {
-    setProductImage("");
-    setProductName("");
-    setProductCategory("");
-    setProductPrice("");
-  };
-
-  const handleDeleteProduct = (name) => {
-    setProducts(products.filter((product) => product.name !== name));
+  const handleDeleteProduct = (id) => {
+    let sure = window.confirm("Are you sure you want to delete this product?");
+    if (!sure) return;
+  
+    axios.delete(`http://localhost:5000/product/delete-product/${id}`)
+    .then((response)=>{
+      console.log(response.data);
+      loadProducts();
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
   };
 
   const handleLocalImageUpload = (e) => {
@@ -128,8 +125,6 @@ const AdminProductDashboard = () => {
   const filteredProducts = allProduct.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
-  
 
   return (
     <div className="flex bg-[#F9F2F2]">
@@ -140,27 +135,25 @@ const AdminProductDashboard = () => {
           <h1 className="text-[12px] md:text-xl lg:text-2xl font-bold">
             Product Stock
           </h1>
-          
-            <div className="flex /flex-col items-center">
-              
-                <p className="mr-4 text-[10px] md:text-[14px]">Welcome Jubril</p>
-                <button
-                  className="bg-[#845649] text-[12px] px-[12px] lg:text-[14px] lg:px-[16px] py-[6px] text-white rounded-[12px] mr-4"
-                  onClick={() => setShowAddProductModal(true)}
-                >
-                  Add product
-                </button>
-                <br className="" />
-              
-            </div>
+
+          <div className="flex /flex-col items-center">
+            <p className="mr-4 text-[10px] md:text-[14px]">Welcome Jubril</p>
+            <button
+              className="bg-[#845649] text-[12px] px-[12px] lg:text-[14px] lg:px-[16px] py-[6px] text-white rounded-[12px] mr-4"
+              onClick={() => setShowAddProductModal(true)}
+            >
+              Add product
+            </button>
+            <br className="" />
+          </div>
 
           <input
-              type="text"
-              placeholder="Search Product Name"
-              className="border border-gray-300 px-4 py-[4px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#845649] placeholder:text-[12px] w-[120px] md:w-[200px]"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            type="text"
+            placeholder="Search Product Name"
+            className="border border-gray-300 px-4 py-[4px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#845649] placeholder:text-[12px] w-[120px] md:w-[200px]"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
 
         <table className="min-w-full bg-white border-collapse">
@@ -204,7 +197,7 @@ const AdminProductDashboard = () => {
                   {product.category}
                 </td>
                 <td className="p-[4px] md:p-4 text-[8px] md:text-[10px] lg:text-[16px]">
-                  {product.price}
+                  #{product.price.toLocaleString()}
                 </td>
                 <td className="p-[4px] md:p-4 text-[8px] md:text-[10px] lg:text-[16px]">
                   {product.quantity}
@@ -212,7 +205,7 @@ const AdminProductDashboard = () => {
                 <td className="p-[4px] md:p-4 text-[8px] md:text-[10px] lg:text-[16px]">
                   <div className="flex space-x-2">
                     <button
-                      onClick={() => handleQuantityClick(product)}
+                      onClick={() => handleQuantityClick(index)}
                       className="p-2 rounded-lg border"
                     >
                       <FontAwesomeIcon
@@ -227,7 +220,7 @@ const AdminProductDashboard = () => {
                       />
                     </button>
                     <button
-                      onClick={() => handleDeleteProduct(product.name)}
+                      onClick={() => handleDeleteProduct(product._id)}
                       className="p-2 rounded-lg border"
                     >
                       <FontAwesomeIcon
@@ -246,61 +239,96 @@ const AdminProductDashboard = () => {
         {showAddProductModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-8 rounded-lg w-[300px] text-center">
-              <h2 className="text-xl font-bold mb-4">Add New Product</h2>
-              <input
-                type="text"
-                placeholder="Product Name"
-                value={productName}
-                onChange={(e) => setProductName(e.target.value)}
-                className="border p-2 w-full mb-4 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Category"
-                value={productCategory}
-                onChange={(e) => setProductCategory(e.target.value)}
-                className="border p-2 w-full mb-4 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Price"
-                value={productPrice}
-                onChange={(e) => setProductPrice(e.target.value)}
-                className="border p-2 w-full mb-4 rounded"
-              />
-              <input
-                type="text"
-                placeholder="Image URL"
-                value={productImage}
-                onChange={(e) => setProductImage(e.target.value)}
-                className="border p-2 w-full mb-4 rounded"
-              />
-              <button
-                className="bg-[#845649] text-white px-4 py-2 rounded-lg mb-4"
-                onClick={() => setShowImageUploadModal(true)}
-              >
-                <FontAwesomeIcon icon={faUpload} className="mr-2" />
-                Upload Local Image
-              </button>
-              {productImage && (
-                <img
-                  src={productImage}
-                  alt="Product Preview"
-                  className="w-24 h-24 object-cover mb-4"
+              <form onSubmit={formik.handleSubmit}>
+                <h2 className="text-xl font-bold mb-4">Add New Product</h2>
+                <input
+                  type="text"
+                  placeholder="Product Name"
+                  name="name"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className="border p-2 w-full mb-4 rounded"
                 />
-              )}
-              <button
-                onClick={handleAddProduct}
-                className="bg-[#845649] text-white px-4 py-2 rounded-lg"
-              >
-                Add Product
-              </button>
-              <button
-                onClick={() => setShowAddProductModal(false)}
-                className="text-gray-500 mt-2 block underline"
-              >
-                Cancel
-              </button>
+                {formik.touched.name && formik.errors.name && (
+                  <p className="text-red-500 text-sm">{formik.errors.name}</p>
+                )}
+                <input
+                  type="text"
+                  placeholder="Category"
+                  name="category"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className="border p-2 w-full mb-4 rounded"
+                />
+                {formik.touched.category && formik.errors.category && (
+                  <p className="text-red-500 text-sm">
+                    {formik.errors.category}
+                  </p>
+                )}
+                <input
+                  type="text"
+                  placeholder="Price"
+                  name="price"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className="border p-2 w-full mb-4 rounded"
+                />
+                {formik.touched.price && formik.errors.price && (
+                  <p className="text-red-500 text-sm">{formik.errors.price}</p>
+                )}
+                <input
+                  type="text"
+                  placeholder="Image URL"
+                  name="image"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className="border p-2 w-full mb-4 rounded"
+                />
+                {formik.touched.image && formik.errors.image && (
+                  <p className="text-red-500 text-sm">{formik.errors.image}</p>
+                )}
+                <input
+                  type="text"
+                  placeholder="Quantity"
+                  name="quantity"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className="border p-2 w-full mb-4 rounded"
+                />
+                {formik.touched.quantity && formik.errors.quantity && (
+                  <p className="text-red-500 text-sm">
+                    {formik.errors.quantity}
+                  </p>
+                )}
+                <button
+                  className="bg-[#845649] text-white px-4 py-2 rounded-lg mb-4"
+                  onClick={() => setShowImageUploadModal(true)}
+                >
+                  <FontAwesomeIcon icon={faUpload} className="mr-2" />
+                  Upload Local Image
+                </button>
+                {productImage && (
+                  <img
+                    src={productImage}
+                    alt="Product Preview"
+                    className="w-24 h-24 object-cover mb-4"
+                  />
+                )}
+                <button
+                  type="submit"
+                  className="bg-[#845649] text-white px-4 py-2 rounded-lg"
+                >
+                  {loading ? "Loading..." : "Add Product"}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowAddProductModal(false)}
+                  className="text-gray-500 mt-2 block underline"
+                >
+                  Cancel
+                </button>
+              </form>
             </div>
           </div>
         )}
@@ -338,7 +366,7 @@ const AdminProductDashboard = () => {
                 >
                   <FontAwesomeIcon icon={faMinus} />
                 </button>
-                <span className="mx-4">{selectedProduct?.qty}</span>
+                <span className="mx-4">{selectedProduct?.quantity}</span>
                 <button
                   onClick={() => handleQuantityChange("increment")}
                   className="p-2 rounded-lg border"
