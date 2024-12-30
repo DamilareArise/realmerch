@@ -32,7 +32,7 @@ const AdminProductDashboard = () => {
   }, []);
 
   const loadProducts = () => {
-    axios.get("http://localhost:5000/product/all-products").then((response) => {
+    axios.get("https://realmerch.onrender.com/product/all-products").then((response) => {
       console.log(response.data);
       setAllProduct(response.data.data);
     });
@@ -230,7 +230,7 @@ const AdminProductDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredProducts.map((product, index) => (
+            {filteredProducts && filteredProducts.length > 0 ? filteredProducts.map((product, index) => (
               <tr key={index} className="border-b">
                 <td className="p-4">
                   <img
@@ -283,7 +283,18 @@ const AdminProductDashboard = () => {
                   </div>
                 </td>
               </tr>
-            ))}
+            )) : (
+              <tr>
+                <td colSpan={6} className="text-center p-4 text-gray-500">
+                  {
+                    filteredProducts == null || undefined
+                    ? "No products found"
+                    : "Loading..."
+
+                  }
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
 
