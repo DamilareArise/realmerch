@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
     category: String,
     quantity: Number,
     image: String,
+    imagePublic_id: String,
     date: { type: Date, default: Date.now },
     is_active: { type: Boolean, default: true },
     // created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'user_collection' }

@@ -49,11 +49,23 @@ const AdminProductDashboard = () => {
 
     onSubmit: (values) => {
       setloading(true);
+
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("category", values.category);
+      formData.append("price", values.price);
+      formData.append("quantity", values.quantity);
+      formData.append("image", values.image);
+      // console.log(formData);
     
       if (isEditing) {
         // Edit product
         axios
-          .put(`https://realmerch.onrender.com/product/update-product/${editingProductId}`, values)
+          .put(`https://realmerch.onrender.com/product/update-product/${editingProductId}`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
           .then((response) => {
             console.log(response.data);
             setloading(false);
@@ -66,8 +78,13 @@ const AdminProductDashboard = () => {
           });
       } else {
         // Add product
+        
         axios
-          .post("https://realmerch.onrender.com/product/add-product", values)
+          .post("https://realmerch.onrender.com/product/add-product", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
           .then((response) => {
             console.log(response.data);
             setloading(false);
@@ -150,7 +167,7 @@ const AdminProductDashboard = () => {
       quantity: product.quantity,
       image: product.image,
     });
-  
+    setProductImage(product.image);
     setShowAddProductModal(true);
     
   };
@@ -159,6 +176,7 @@ const AdminProductDashboard = () => {
     setShowAddProductModal(false);
     setIsEditing(false);
     setEditingProductId(null);
+    setProductImage("");
     formik.resetForm();
   };
   
@@ -167,7 +185,10 @@ const AdminProductDashboard = () => {
 
   const handleLocalImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
+      const image = e.target.files[0];
+      formik.setFieldValue("image", image);
       setProductImage(URL.createObjectURL(e.target.files[0]));
+      console.log(productImage);
       setShowImageUploadModal(false);
     }
   };
@@ -342,7 +363,7 @@ const AdminProductDashboard = () => {
                 {formik.touched.price && formik.errors.price && (
                   <p className="text-red-500 text-sm">{formik.errors.price}</p>
                 )}
-                <input
+                {/* <input
                   type="text"
                   placeholder="Image URL"
                   name="image"
@@ -353,7 +374,7 @@ const AdminProductDashboard = () => {
                 />
                 {formik.touched.image && formik.errors.image && (
                   <p className="text-red-500 text-sm">{formik.errors.image}</p>
-                )}
+                )} */}
                 <input
                   type="text"
                   placeholder="Quantity"
