@@ -89,6 +89,8 @@ const AdminProductDashboard = () => {
             console.log(response.data);
             setloading(false);
             setShowAddProductModal(false);
+            setProductImage("");
+            formik.resetForm();
             loadProducts();
           })
           .catch((error) => {
